@@ -44,7 +44,15 @@ router.post("/quiz-edit" , (req, res) => {
     if (!isValid) {
         return res.status(400).json(errors);
     }
-
+    Quiz.updateOne(
+       { __id: req.body.__id },
+       {
+           $set: {name: req.body.name,
+            description: req.body.description,
+            time_limit: req.body.time_limit,
+            questions: req.body.questions}
+       }
+    )
     
 })
 
