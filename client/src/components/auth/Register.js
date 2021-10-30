@@ -1,6 +1,5 @@
-import { connect } from "mongoose";
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
@@ -16,7 +15,15 @@ class Register extends Component {
       errors: {}
     };
   }
-  componentWillReceiveProps(nextProps) {
+
+  componentDidMount() {
+    // If logged in and user navigates to Login page, should redirect them to dashboard
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/dashboard");
+    }
+  }
+
+componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({
         errors: nextProps.errors
@@ -34,10 +41,7 @@ const newUser = {
       password: this.state.password,
       password2: this.state.password2
     };
-
-    this.props.registerUser(newUser, this.props.history);
-
-console.log(newUser);
+this.props.registerUser(newUser, this.props.history); 
   };
 render() {
     const { errors } = this.state;
@@ -98,6 +102,7 @@ return (
                   })}
                 />
                 <label htmlFor="password">Password</label>
+                <span className="red-text">{errors.password}</span>
               </div>
               <div className="input-field col s12">
                 <input
@@ -134,30 +139,16 @@ return (
     );
   }
 }
-
-componentDidMount() {
-  // If logged in and user navigates to Register page, should redirect them to dashboard
-  if (this.props.auth.isAuthenticated) {
-    this.props.history.push("/dashboard");
-  }
-}
-
 Register.propTypes = {
-  registerUser:
-  PropTypes.func.isRequired,
-  auth:
-  PropTypes.object.isRequired,
-  errors:
-  PropTypes.object.isRequired
+  registerUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
 };
-
 const mapStateToProps = state => ({
   auth: state.auth,
   errors: state.errors
 });
-
 export default connect(
-  mapStateToProps, 
+  mapStateToProps,
   { registerUser }
 )(withRouter(Register));
-
