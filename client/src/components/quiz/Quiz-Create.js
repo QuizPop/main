@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { correct } from "react-redux";
 import classNames from "classnames";
 import { connect } from "react-redux";
-import { Quiz_Create } from "../../actions/authActions";
+import { Quiz_Create } from "../../actions/QuizActions";
 class QuizCreate extends Component {
     constructor() {
         super();
