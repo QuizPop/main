@@ -8,10 +8,10 @@ import {
   USER_LOADING
 } from "./types";
 
-export const Quiz_Create = (userData, history) => dispatch => {
+export const Quiz_Create = (quizData, history) => dispatch => {
     axios
-      .post("/api/users/register", userData)
-      .then(res => history.push("/login")) // re-direct to login on successful register
+      .post("/api/Quizzes/quiz-creation", quizData)
+      .then(res => history.push("/dashboard")) // re-direct to login on successful register
       .catch(err =>
         dispatch({
           type: GET_ERRORS,
