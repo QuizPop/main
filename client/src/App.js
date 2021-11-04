@@ -11,6 +11,12 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
+import quiz from "./components/quiz/quiz";
+import quizCreate from "./components/quiz/Quiz-Create";
+import quizList from "./components/quiz/Quiz-List";
+import platform from "./components/platform/platform";
+import platformCreate from "./components/platform/Platform-Create";
+import platformList from "./components/platform/Platform-List";
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -40,6 +46,12 @@ class App extends Component {
             <Route exact path="/" component={Landing} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/quiz" component={quiz} />
+            <Route exact path="/quiz-create" component={quizCreate} />
+            <Route exact path="/quiz-list" component={quizList} />
+            <Route exact path="/platform" component={platform} />
+            <Route exact path="/platform-create" component={platformCreate} />
+            <Route exact path="/platform-list" component={platformList} />
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
             </Switch>

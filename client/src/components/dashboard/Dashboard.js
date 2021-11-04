@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import Quiz from "../quiz/quiz"
+import { Link } from "react-router-dom";
 
 class Dashboard extends Component {
   onLogoutClick = e => {
@@ -36,6 +37,19 @@ return (
             >
               Logout
             </button>
+            <div className="col s6">
+              <Link
+                to="/quiz"
+                style={{
+                  width: "140px",
+                  borderRadius: "3px",
+                  letterSpacing: "1.5px"
+                }}
+                className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+              >
+                Quiz
+              </Link>
+            </div>
           </div>
         </div>
       </div>
