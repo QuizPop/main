@@ -44,6 +44,10 @@ router.post("/quiz-edit" , (req, res) => {
        }
     )
     
+});
+
+router.post("/quiz-list", (req, res) => {
+    Quiz.find();
 })
 
 module.exports = router;
