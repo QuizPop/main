@@ -10,18 +10,9 @@ const validateQuizTakingInput = require("../../validation/QuizTaking");
 
 const Quiz = require("../../models/Quiz");
 
-router.post("/quiz-creation", (req, res) => {
-
-    const {errors, isValid } = validateQuizCreationInput(req.body);
-
-    if (!isValid) {
-        return res.status(400).json(errors);
-    }
+router.post("/quiz-create", (req, res) => {
 
     Quiz.findOne({name : req.body.name}).then(quiz => {
-        if(quiz) {
-            return res.status(400).json( {name: "Name already exists"});
-        } else {
             const newQuiz = new Quiz({
                 name: req.body.name,
                 description: req.body.description,
@@ -33,8 +24,7 @@ router.post("/quiz-creation", (req, res) => {
             .save()
             .then(quiz => res.json(quiz))
             .catch(err => console.log(err));
-        }
-    });
+        });
 });
 
 router.post("/quiz-edit" , (req, res) => {

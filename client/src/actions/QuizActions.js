@@ -10,8 +10,8 @@ import {
 
 export const Quiz_Create = (quizData, history) => dispatch => {
     axios
-      .post("/api/Quizzes/quiz-creation", quizData)
-      .then(res => history.push("/dashboard")) // re-direct to login on successful register
+      .post("/api/Quizzes/quiz-create", quizData)
+      .then(res => history.push("/dashboard")) // re-direct to dashboard after successful creation
       .catch(err =>
         dispatch({
           type: GET_ERRORS,

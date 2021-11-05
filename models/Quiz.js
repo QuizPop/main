@@ -11,7 +11,7 @@ const QuizSchema = new Schema({
   },
   platform_ID: {
       type: String,
-      required: true
+      required: false
   },
   time_limit: {
     type: Number
@@ -21,6 +21,7 @@ const QuizSchema = new Schema({
     default: Date.now
   },
   questions:
-    [{questiontext: String, answerOptions: [{answerText: String, isCorrect: Boolean}]}]
-});
+    [{questiontext: String, answerOptions: [{answerText: String, isCorrect: Boolean}]}],
+    required: false
+  });
 module.exports = User = mongoose.model("Quizzes", QuizSchema);
