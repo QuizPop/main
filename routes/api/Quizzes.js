@@ -5,8 +5,8 @@ const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
 
 const validateQuizCreationInput = require("../../validation/QuizCreation");
-const validateQuizEditInput = require("../../validation/QuizEdit");
-const validateQuizTakingInput = require("../../validation/QuizTaking");
+//const validateQuizEditInput = require("../../validation/QuizEdit");
+//const validateQuizTakingInput = require("../../validation/QuizTaking");
 
 const Quiz = require("../../models/Quiz");
 

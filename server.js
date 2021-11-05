@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 
 const users = require("./routes/api/users");
+const quizzes = require("./routes/api/Quizzes");
 const path = require('path');
 const app = express();
 
@@ -36,6 +37,7 @@ require("./config/passport")(passport);
 
 // Routes
 app.use("/api/users", users);
+app.use("/api/Quizzes", quizzes);
 
 // serve static assets if in production
 if(process.env.NODE_ENV === 'production') {

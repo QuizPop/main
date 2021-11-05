@@ -18,13 +18,13 @@ class QuizCreate extends Component {
         };
     }
     
-    /*componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps(nextProps) {
         if (nextProps.errors) {
             this.setState({
                 errors: nextProps.errors
             });
         }
-    }*/
+    }
     onChange = e => {
         this.setState({ [e.target.id]: e.target.value });
     };
@@ -108,7 +108,7 @@ QuizCreate.propTypes = {
 
 const mapStateToProps = state => ({
     auth: state.auth,
-    //errors: state.errors
+    errors: state.errors
   });
 
 export default connect(
