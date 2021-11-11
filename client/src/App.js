@@ -13,7 +13,7 @@ import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
 import quiz from "./components/quiz/quiz";
 import quizCreate from "./components/quiz/Quiz-Create";
-import quizList from "./components/quiz/Quiz-List";
+import quizList from "./components/quiz-list/quiz-list";
 import platform from "./components/platform/platform";
 import platformCreate from "./components/platform/Platform-Create";
 import platformList from "./components/platform/Platform-List";
@@ -54,6 +54,7 @@ class App extends Component {
             <Route exact path="/platform-list" component={platformList} />
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              <PrivateRoute exact path="/quizlist" component={quizList} />
             </Switch>
           </div>
         </Router>
