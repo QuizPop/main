@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './index.css'
+
 export default function Quiz() {
+
 	const questions = [
 		{
 			questionText: 'What is the capital of France?',
@@ -57,6 +59,7 @@ export default function Quiz() {
 		}
 	};
 	return (
+		
 		<div className='app'>
 			{showScore ? (
 				<div className='score-section'>
@@ -77,6 +80,8 @@ export default function Quiz() {
 					</div>
 				</>
 			)}
+			
 		</div>
+		
 	);
 }

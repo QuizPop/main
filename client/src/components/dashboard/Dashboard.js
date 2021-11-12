@@ -11,7 +11,8 @@ class Dashboard extends Component {
     this.props.logoutUser();
   };
 render() {
-    const { user } = this.props.auth;
+    const { user } = this.props.auth; 
+    // user.name.split(" ")[0]
 return (
 
       <div style={{ height: "75vh" }} className="container valign-wrapper">
@@ -26,10 +27,11 @@ return (
             </h4>
             <button
               style={{
+
                 width: "150px",
                 borderRadius: "3px",
                 letterSpacing: "1.5px",
-                marginTop: "1rem"
+                marginTop: "1rem",
               }}
               onClick={this.onLogoutClick}
               className="btn btn-large waves-effect waves-light hoverable blue accent-3"
@@ -49,6 +51,22 @@ return (
                 Quiz
               </Link>
             </div>
+
+            <div className="col s6">
+              <Link
+                to="/myprofile"
+                style={{
+                  width: "140px",
+                  borderRadius: "3px",
+                  letterSpacing: "1.5px"
+                }}
+                className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+              >
+                MyProfile
+              </Link>
+            </div>
+
+
             <div className="col s6">
               <Link
                 to="/quiz-create"
