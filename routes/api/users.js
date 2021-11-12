@@ -81,7 +81,9 @@ const { errors, isValid } = validateLoginInput(req.body);
         // Create JWT Payload
         const payload = {
           id: user.id,
-          name: user.name
+          name: user.name,
+          email: user.email,
+          bio: user.bio
         };
   
 // Sign token

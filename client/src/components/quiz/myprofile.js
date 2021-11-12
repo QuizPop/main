@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './index.css'
 
-const User = require("../../../../../models/User");
 
 
 export default function Quiz() {
