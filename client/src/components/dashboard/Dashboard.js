@@ -11,7 +11,8 @@ class Dashboard extends Component {
     this.props.logoutUser();
   };
 render() {
-    const { user } = this.props.auth;
+    const { user } = this.props.auth; 
+    // user.name.split(" ")[0]
 return (
 
       <div style={{ height: "75vh" }} className="container valign-wrapper">
