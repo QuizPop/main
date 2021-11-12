@@ -83,7 +83,8 @@ const { errors, isValid } = validateLoginInput(req.body);
           id: user.id,
           name: user.name,
           email: user.email,
-          bio: user.bio
+          bio: user.bio, 
+          date: user.date
         };
   
 // Sign token
