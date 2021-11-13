@@ -48,7 +48,7 @@ return (
 
 
               <p className="flow-text grey-text text-darken-1">
-                Score:{" "}{'0'}
+                Score:{" "}{user.score}
                 <span style={{ fontFamily: "monospace" }}></span>
               </p>
 

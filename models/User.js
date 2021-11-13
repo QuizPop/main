@@ -21,6 +21,11 @@ const UserSchema = new Schema({
   bio:{
     type: String,
     required: true
+  },
+  score:{
+    type: Number,
+    required: false,
+    default: 0
   }
 });
 module.exports = User = mongoose.model("users", UserSchema);
