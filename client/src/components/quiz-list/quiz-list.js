@@ -5,6 +5,13 @@ import { logoutUser } from "../../actions/authActions";
 import { Link } from "react-router-dom";
 
 class quizList extends Component {
+<<<<<<< HEAD
+=======
+  onLogoutClick = e => {
+    e.preventDefault();
+    this.props.logoutUser();
+  };
+>>>>>>> origin/updatedbio
 
 render() {
     

@@ -31,7 +31,8 @@ User.findOne({ email: req.body.email }).then(user => {
       const newUser = new User({
         name: req.body.name,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password, 
+        bio: req.body.bio
       });
 
 // Hash password before saving in database
@@ -80,7 +81,10 @@ const { errors, isValid } = validateLoginInput(req.body);
         // Create JWT Payload
         const payload = {
           id: user.id,
-          name: user.name
+          name: user.name,
+          email: user.email,
+          bio: user.bio, 
+          date: user.date
         };
   
 // Sign token

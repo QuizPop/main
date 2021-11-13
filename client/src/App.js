@@ -12,6 +12,7 @@ import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
 import quiz from "./components/quiz/quiz";
+import myprofile from "./components/quiz/myprofile";
 import quizCreate from "./components/quiz/Quiz-Create";
 import quizList from "./components/quiz-list/quiz-list";
 import platform from "./components/platform/platform";
@@ -47,6 +48,7 @@ class App extends Component {
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/quiz" component={quiz} />
+            <Route exact path="/myprofile" component={myprofile} />
             <Route exact path="/quiz-create" component={quizCreate} />
             <Route exact path="/quiz-list" component={quizList} />
             <Route exact path="/platform" component={platform} />
