@@ -11,25 +11,25 @@ class Dashboard extends Component {
     this.props.logoutUser();
   };
 render() {
-    const { user } = this.props.auth;
+    const { user } = this.props.auth; 
+    // user.name.split(" ")[0]
+    console.log(user)
 return (
 
       <div style={{ height: "75vh" }} className="container valign-wrapper">
         <div className="row">
           <div className="col s12 center-align">
             <h4>
-              <b>Hey there,</b> {user.name.split(" ")[0]}
-              <p className="flow-text grey-text text-darken-1">
-                Welcome to QuizPop{" "}
-                <span style={{ fontFamily: "monospace" }}></span>
-              </p>
+              <b>Welcome to QuizPop!</b> 
+
             </h4>
             <button
               style={{
+
                 width: "150px",
                 borderRadius: "3px",
                 letterSpacing: "1.5px",
-                marginTop: "1rem"
+                marginTop: "1rem",
               }}
               onClick={this.onLogoutClick}
               className="btn btn-large waves-effect waves-light hoverable blue accent-3"
@@ -47,6 +47,35 @@ return (
                 className="btn btn-large waves-effect waves-light hoverable blue accent-3"
               >
                 Quiz
+              </Link>
+            </div>
+
+            <div className="col s6">
+              <Link
+                to="/myprofile"
+                style={{
+                  width: "140px",
+                  borderRadius: "3px",
+                  letterSpacing: "1.5px"
+                }}
+                className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+              >
+                MyProfile
+              </Link>
+            </div>
+
+
+            <div className="col s6">
+              <Link
+                to="/quizlist"
+                style={{
+                  width: "140px",
+                  borderRadius: "3px",
+                  letterSpacing: "1.5px"
+                }}
+                className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+              >
+                Quizzes
               </Link>
             </div>
             <div className="col s6">
