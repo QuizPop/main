@@ -6,13 +6,14 @@ const PlatformSchema = new Schema({
     type: String,
     required: true
   },
-  description: {
+  owner_ID: {
     type: String,
     required: true
   },
-  tags: {
+  description: {
     type: String,
   },
+  tags: [{tag: String}],
   date: {
     type: Date,
     default: Date.now

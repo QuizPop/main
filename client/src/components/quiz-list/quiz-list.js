@@ -20,13 +20,34 @@ return (
                 Here are the List of Quizzes you can take{" "}
                 <span style={{ fontFamily: "monospace" }}></span>
               </p>
+              
             </h4>
-            <ul> List Item 1</ul>
-            <ul> List Item 1</ul>
-            <ul> List Item 1</ul>
-            <ul> List Item 1</ul>
-          </div>
+            <ul className="row">
+              <Link
+                to="/quiz"
+                        >
+                Quiz 1
+              </Link>
+          </ul>
+            <ul> Quiz 2</ul>
+            <ul> Quiz 3</ul>
+            <ul> Quiz 4</ul>
+            <div className="col s6">
+              <Link
+                to="/dashboard"
+                style={{
+                  width: "150px",
+                  borderRadius: "2px",
+                  letterSpacing: "1.5px"
+                }}
+                className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+              >
+             Dashboard
+              </Link>
+            </div>
+            
         </div>
+      </div> 
       </div>
       
     );

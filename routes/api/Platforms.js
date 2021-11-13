@@ -8,3 +8,19 @@ const keys = require("../../config/keys");
 //const validatePlatformEditInput = require("../../validation/PlatformEdit");
 
 const Platform = require("../../models/Platform");
+
+router.post("/platform-create", (req, res) => {
+
+    Quiz.findOne({name : req.body.name}).then(quiz => {
+            const newQuiz = new Quiz({
+                name: req.body.name,
+                owner_ID: req.body.owner_ID,
+                description: req.body.description,
+                tags: req.body.tags
+            });
+            newQuiz
+            .save()
+            .then(quiz => res.json(quiz))
+            .catch(err => console.log(err));
+        });
+});

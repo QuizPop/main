@@ -13,15 +13,26 @@ const QuizSchema = new Schema({
       type: String,
       required: false
   },
+  owner_ID: {
+    type: String,
+    required: false
+  },
   time_limit: {
-    type: Number
+    type: String
   },
   date: {
     type: Date,
     default: Date.now
   },
   questions:
-    [{questiontext: String, answerOptions: [{answerText: String, isCorrect: Boolean}]}],
+    [{questionText: String, 
+      hint: String, 
+      answerOption1: String, 
+      answerOption2: String, 
+      answerOption3: String, 
+      answerOption4: String,
+      answerIndex: Number
+    }],
     required: false
   });
 module.exports = User = mongoose.model("Quizzes", QuizSchema);
