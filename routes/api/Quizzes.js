@@ -28,7 +28,7 @@ router.post("/quiz-create", (req, res) => {
         });
 });
 
-router.post("/quiz-edit" , (req, res) => {
+router.post("/quiz-edt" , (req, res) => {
     
     const {errors, isValid } = validateQuizEditInput(req.body);
 

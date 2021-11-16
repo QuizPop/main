@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { correct } from "react-redux";
 import classnames from "classnames";
 import { connect } from "react-redux";
-import { platformCreate } from "../../actions/PlatformActions";
+import { Platform_Create } from "../../actions/PlatformActions";
 class platform extends Component {
     constructor() {
         super();
@@ -34,7 +34,7 @@ class platform extends Component {
             description: this.state.description,
             tags: this.state.tags
         };
-        this.props.platformCreate(newPlatform, this.props.history);
+        this.props.Platform_Create(newPlatform, this.props.history);
     };
   
         render() {
@@ -127,5 +127,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { platformCreate }
+    { Platform_Create }
   )(platform);

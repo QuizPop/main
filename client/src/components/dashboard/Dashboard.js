@@ -90,6 +90,21 @@ return (
               >
                 Create
               </Link>
+
+              <div className="col s6">
+              <Link
+                to="/platform-create"
+                style={{
+                  width: "140px",
+                  borderRadius: "3px",
+                  letterSpacing: "1.5px"
+                }}
+                className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+              >
+                Platform Create
+              </Link>
+            </div>
+
             </div>
           </div>
         </div>

@@ -8,8 +8,7 @@ import {
   USER_LOADING
 } from "./types";
 
-export const platformCreate = (platformData, history) => dispatch => {
-  console.log('platformData')
+export const Platform_Create = (platformData, history) => dispatch => {
 
   console.log(platformData)
     axios
