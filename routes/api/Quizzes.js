@@ -13,6 +13,7 @@ const Quiz = require("../../models/Quiz");
 router.post("/quiz-create", (req, res) => {
 
     Quiz.findOne({name : req.body.name}).then(quiz => {
+
             const newQuiz = new Quiz({
                 name: req.body.name,
                 description: req.body.description,

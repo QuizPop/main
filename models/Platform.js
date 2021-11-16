@@ -4,16 +4,22 @@ const Schema = mongoose.Schema;
 const PlatformSchema = new Schema({
   name: {
     type: String,
-    required: true
+    required: false
   },
   owner_ID: {
     type: String,
-    required: true
+    required: false
   },
   description: {
     type: String,
+    required: false
+
   },
-  tags: [{tag: String}],
+  tags: {
+    type: String,
+    required: false
+
+  },
   date: {
     type: Date,
     default: Date.now

@@ -9,6 +9,7 @@ import {
 } from "./types";
 
 export const Quiz_Create = (quizData, history) => dispatch => {
+  console.log(quizData)
     axios
       .post("/api/Quizzes/quiz-create", quizData)
       .then(res => history.push("/dashboard")) // re-direct to dashboard after successful creation

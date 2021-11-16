@@ -9,6 +9,9 @@ import {
 } from "./types";
 
 export const platformCreate = (platformData, history) => dispatch => {
+  console.log('platformData')
+
+  console.log(platformData)
     axios
       .post("/api/Platforms/platform-create", platformData)
       .then(res => history.push("/dashboard")) // re-direct to dashboard after successful creation
