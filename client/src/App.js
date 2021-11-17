@@ -53,6 +53,7 @@ class App extends Component {
             <Route exact path="/quiz-list" component={quizList} />
             <Route exact path="/platform-create" component={platform} />
             <Route exact path="/platform-list" component={platformList} />
+
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute exact path="/quizlist" component={quizList} />
