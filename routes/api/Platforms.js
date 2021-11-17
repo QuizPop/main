@@ -27,6 +27,27 @@ router.post("/platform-create", (req, res) => {
         });
 });
 
+router.post("/", (req, res) => {
+
+    return Platform.find((error, data) => {
+        if(error){
+            return next (error);
+        } else {
+            return res.json(data);
+        }
+   });
+});
+
+router.route("/").get((req, res)=> {
+    return Platform.find((error, data) => {
+        if(error){
+            return next (error);
+        } else {
+            return res.json(data);
+        }
+   });
+});
+
 
 
 module.exports = router;
