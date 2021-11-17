@@ -17,7 +17,7 @@ constaractor(state) {
     .catch(e => console.log(e))
   }
   render() {
-      
+
     // const cities=this.state.locations.map(location => (
     //   <div key={location._id}>
     //  <h1>{location.name}</h1>
@@ -25,7 +25,7 @@ constaractor(state) {
     //     <h1>platforms</h1>
     //   </div>
     // ));
-
+    
     return (
       <div className="Cities">
         {/* {cities} */}

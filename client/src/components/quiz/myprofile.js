@@ -53,20 +53,6 @@ return (
               </p>
 
             </h4>
-         
-            <div className="col s6">
-              <Link
-                to="/dashboard"
-                style={{
-                  width: "170px",
-                  borderRadius: "2px",
-                  letterSpacing: ".5px"
-                }}
-                className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-              >
-             Dashboard
-              </Link>
-            </div>
           </div>
         </div>
       </div>
