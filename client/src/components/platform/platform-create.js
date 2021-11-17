@@ -4,7 +4,22 @@ import PropTypes from "prop-types";
 import { correct } from "react-redux";
 import classnames from "classnames";
 import { connect } from "react-redux";
-import { Platform_Create } from "../../actions/PlatformActions";
+import { Platform_Create } from "../../actions/PlatformActions"; 
+
+// const MongoClient = require('mongodb').MongoClient;
+// const assert = require('assert'); 
+// const url = "mongodb+srv://tylerrimkunas:242000relyt@quizpopdb.6ca7n.mongodb.net/QuizPopDB?retryWrites=true&w=majority"  
+// const client = new MongoClient(url);
+
+// MongoClient.connect(url, function(err, d) {
+//   assert.equal(null, err);
+//   client.close();
+// });  
+
+// const db = client.db("platforms");  
+// var cursor = db.collection('platforms').find({ name: "NBA" }); 
+// console.log(cursor); 
+
 class platform extends Component {
     constructor() {
         super();
