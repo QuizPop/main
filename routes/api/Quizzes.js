@@ -51,4 +51,25 @@ router.post("/quiz-list", (req, res) => {
     Quiz.find();
 })
 
+
+router.post("/", (req, res) => {
+
+    return Quiz.find((error, data) => {
+        if(error){
+            return next (error);
+        } else {
+            return res.json(data);
+        }
+   });
+});
+
+router.route("/").get((req, res)=> {
+    return Quiz.find((error, data) => {
+        if(error){
+            return next (error);
+        } else {
+            return res.json(data);
+        }
+   });
+});
 module.exports = router;

@@ -19,12 +19,10 @@ const data = res.data
 console.log(data)
 const users = data.map(u =>
   <div>
-  <p>{u.name}</p>
-  <p>{u.description}</p>
-  <p>{u.platform_ID}</p>
-  <p>{u.time_limit}</p>
-  <p> </p>
-
+   <p> -------------------------</p>
+  <p>Name: {u.name}</p>
+  <p>Description: {u.description}</p>
+  <p>Time: {u.time_limit}</p>
   </div>
   )
 

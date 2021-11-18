@@ -14,7 +14,6 @@ import Dashboard from "./components/dashboard/Dashboard";
 import quiz from "./components/quiz/quiz";
 import myprofile from "./components/quiz/myprofile";
 import quizCreate from "./components/quiz/Quiz-Create";
-import quizList from "./components/quiz-list/quiz-list";
 import platform from "./components/platform/platform-create";
 //import platformCreate from "./components/platform/Platform-Create";
 import platformList from "./components/platform/Platform-List";
