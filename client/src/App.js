@@ -18,6 +18,8 @@ import quizList from "./components/quiz-list/quiz-list";
 import platform from "./components/platform/platform-create";
 //import platformCreate from "./components/platform/Platform-Create";
 import platformList from "./components/platform/Platform-List";
+import quizList from "./components/quiz/Quiz-List";
+
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
