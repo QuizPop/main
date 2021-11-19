@@ -14,6 +14,7 @@ render() {
     const { user } = this.props.auth; 
     // user.name.split(" ")[0]
     console.log(user)
+    console.log()
 return (
 
       <div style={{ height: "75vh" }} className="container valign-wrapper">

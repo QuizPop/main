@@ -15,6 +15,26 @@ const User = require("../../models/User");
 // @route POST api/users/register
 // @desc Register user
 // @access Public
+router.route("/").get((req, res)=> {
+  return User.find((error, data) => {
+      if(error){
+          return next (error);
+      } else {
+          return res.json(data);
+      }
+ });
+});
+
+router.post("/", (req, res) => {
+
+return User.find((error, data) => {
+    if(error){
+        return next (error);
+    } else {
+        return res.json(data);
+    }
+});
+
 router.post("/register", (req, res) => {
   // Form validation
 
@@ -23,6 +43,8 @@ const { errors, isValid } = validateRegisterInput(req.body);
   if (!isValid) {
     return res.status(400).json(errors);
   }
+
+});
 
 User.findOne({ email: req.body.email }).then(user => {
     if (user) {
@@ -85,7 +107,8 @@ const { errors, isValid } = validateLoginInput(req.body);
           name: user.name,
           email: user.email,
           bio: user.bio, 
-          date: user.date
+          date: user.date,
+          score: user.score
         };
   
 // Sign token

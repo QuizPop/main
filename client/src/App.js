@@ -16,6 +16,7 @@ import myprofile from "./components/quiz/myprofile";
 import quizCreate from "./components/quiz/Quiz-Create";
 import platform from "./components/platform/platform-create";
 //import platformCreate from "./components/platform/Platform-Create";
+import leaderboards from "./components/leaderboards/leaderboard"
 import platformList from "./components/platform/Platform-List";
 import quizList from "./components/quiz/Quiz-List";
 
@@ -54,6 +55,7 @@ class App extends Component {
             <Route exact path="/quiz-list" component={quizList} />
             <Route exact path="/platform-create" component={platform} />
             <Route exact path="/platform-list" component={platformList} />
+            <Route exact path="/leaderboard" component={leaderboards} />
 
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />

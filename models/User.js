@@ -27,7 +27,6 @@ const UserSchema = new Schema({
   },
   score:{
     type: Number,
-    required: false,
     default: 0
   }
 });
