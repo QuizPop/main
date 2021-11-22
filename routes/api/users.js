@@ -15,26 +15,6 @@ const User = require("../../models/User");
 // @route POST api/users/register
 // @desc Register user
 // @access Public
-router.route("/").get((req, res)=> {
-  return User.find((error, data) => {
-      if(error){
-          return next (error);
-      } else {
-          return res.json(data);
-      }
- });
-});
-
-router.post("/", (req, res) => {
-
-return User.find((error, data) => {
-    if(error){
-        return next (error);
-    } else {
-        return res.json(data);
-    }
-});
-
 router.post("/register", (req, res) => {
   // Form validation
 
@@ -44,8 +24,6 @@ const { errors, isValid } = validateRegisterInput(req.body);
     return res.status(400).json(errors);
   }
 
-});
-
 User.findOne({ email: req.body.email }).then(user => {
     if (user) {
       return res.status(400).json({ email: "Email already exists" });
@@ -54,8 +32,7 @@ User.findOne({ email: req.body.email }).then(user => {
         name: req.body.name,
         email: req.body.email,
         password: req.body.password, 
-        bio: req.body.bio,
-        score: 0
+        bio: req.body.bio
       });
 
 // Hash password before saving in database
@@ -104,11 +81,7 @@ const { errors, isValid } = validateLoginInput(req.body);
         // Create JWT Payload
         const payload = {
           id: user.id,
-          name: user.name,
-          email: user.email,
-          bio: user.bio, 
-          date: user.date,
-          score: user.score
+          name: user.name
         };
   
 // Sign token

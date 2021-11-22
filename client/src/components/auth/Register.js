@@ -13,7 +13,6 @@ class Register extends Component {
       password: "",
       password2: "",
       bio:"",
-      score:"",
       errors: {}
     };
   }
