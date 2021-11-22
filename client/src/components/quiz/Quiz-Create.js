@@ -38,6 +38,7 @@ class QuizCreate extends Component {
         };
         this.props.Quiz_Create(newQuiz, this.props.history);
     };
+
     addQuestion = e => {
       e.preventDefault();
       const newQuestion = {
@@ -47,10 +48,20 @@ class QuizCreate extends Component {
         answerOption2: document.getElementById("answerOption2").value,
         answerOption3: document.getElementById("answerOption3").value,
         answerOption4: document.getElementById("answerOption4").value,
-        answerIndex: document.getElementById("answerIndex").value
+        answerIndex: document.getElementById("answerIndex").value,
+        answerOptions:[
+          { answerText: document.getElementById("answerOption1").value, isCorrect: false },
+				{ answerText:document.getElementById("answerOption2").value, isCorrect: true },
+				{ answerText: document.getElementById("answerOption3").value, isCorrect: false },
+				{ answerText: document.getElementById("answerOption4").value, isCorrect: false },
+        ]
       };
       this.state.questions.push(newQuestion);
 
+    }
+    clearQuestions= e =>{
+      e.preventDefault();
+      document.getElementById('myform').reset();
     }
         render() {
             //const { errors } = this.state;
@@ -111,7 +122,7 @@ class QuizCreate extends Component {
                     </div>
                   </div>
                   <h5>Questions</h5>
-                      <form noValidate onAdd = {this.onAdd}>
+                      <form id= "myform" noValidate onAdd = {this.onAdd}>
                           question
                           <input id="questionText" label="question" type="text" />
                           hint
@@ -128,7 +139,8 @@ class QuizCreate extends Component {
                           <input id="answerIndex" type="text" />
                           <button
                             type="button"
-                            onClick={this.addQuestion}
+                            className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                            onClick={this.addQuestion , this.clearQuestions}
                           >
                             add
                           </button>

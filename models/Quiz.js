@@ -31,7 +31,8 @@ const QuizSchema = new Schema({
       answerOption2: String, 
       answerOption3: String, 
       answerOption4: String,
-      answerIndex: Number
+      answerIndex: Number,
+      answerOptions: Array
     }],
     required: false
   });

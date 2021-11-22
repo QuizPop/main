@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './index.css'
 
-export default function Quiz() {
+export default function Quiz(questionArray) {
 
 	const questions = [
 		{
