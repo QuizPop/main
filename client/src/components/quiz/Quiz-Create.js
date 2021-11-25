@@ -57,12 +57,10 @@ class QuizCreate extends Component {
         ]
       };
       this.state.questions.push(newQuestion);
+      document.getElementById('myform').reset();
 
     }
-    clearQuestions= e =>{
-      e.preventDefault();
-      document.getElementById('myform').reset();
-    }
+
         render() {
             //const { errors } = this.state;
             return (
@@ -122,7 +120,7 @@ class QuizCreate extends Component {
                     </div>
                   </div>
                   <h5>Questions</h5>
-                      <form id= "myform" noValidate onAdd = {this.onAdd}>
+                      <form id = "myform" noValidate onAdd = {this.onAdd}>
                           question
                           <input id="questionText" label="question" type="text" />
                           hint
@@ -140,7 +138,7 @@ class QuizCreate extends Component {
                           <button
                             type="button"
                             className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-                            onClick={this.addQuestion , this.clearQuestions}
+                            onClick={this.addQuestion}
                           >
                             add
                           </button>
