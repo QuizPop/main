@@ -13,9 +13,13 @@ class QuizCreate extends Component {
             description: "",
             platform_ID: "", 
             time_limit: "",
-            questions: []
-
-        };
+            questions: [],
+            check1: false,
+            check2: false,
+            check3: false,
+            check4: false
+        }
+       
     }
     
     componentWillReceiveProps(nextProps) {
@@ -61,8 +65,18 @@ class QuizCreate extends Component {
 
     }
 
+    handleCheck = e => {
+     // this.setState({[e.target.name]: e.target.checked})
+     console.log(e.target.checked)
+    }
+   
+
         render() {
             //const { errors } = this.state;
+
+      //   console.log(document.getElementById("check1").checked, "checked < ====")
+      const {check1, check2, check3, check4} = this.state
+      console.log(check1, check2, " <+===checks")
             return (
                 <div className="container">
                   <div className="row">
@@ -127,14 +141,19 @@ class QuizCreate extends Component {
                           <input id="hint" type="text" />
                           choice 1
                           <input id="answerOption1" type="text" />
+                          <input type="checkbox" style={{opacity: 1}} onChange={this.handleCheck}  checked={check1} name="check1"/>
                           choice 2
                           <input id="answerOption2" type="text" />
+                          <input type="checkbox" style={{opacity: 1}} onChange={this.handleCheck} checked={check2} name="check2"/>
                           choice 3
-                          <input id="answerOption3" type="text" />
+                          <input id="answerOption3"  type="text" />
+                          <input type="checkbox" style={{opacity: 1}} onChange={this.handleCheck} checked={check3} name="check3"/>
                           choice 4
                           <input id="answerOption4" type="text" />
+                          <input type="checkbox" style={{opacity: 1}} checked={check4}  onChange={this.handleCheck}  checked={check4} name="check4"/>
                           Answer Index
                           <input id="answerIndex" type="text" />
+                         
                           <button
                             type="button"
                             className="btn btn-large waves-effect waves-light hoverable blue accent-3"

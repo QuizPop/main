@@ -72,4 +72,15 @@ router.route("/").get((req, res)=> {
         }
    });
 });
+
+router.route("/:id").get((req, res)=> {
+    const id = req.params.id
+    return Quiz.findById(id, (error, data) => {
+        if(error){
+            return next (error);
+        } else {
+            return res.json(data);
+        }
+   });
+});
 module.exports = router;

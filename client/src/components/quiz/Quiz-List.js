@@ -1,54 +1,40 @@
-import React, {Component} from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
 
-export default class quizList extends Component {
-constructor(props) {
-super(props);
-this.state = {
-Users: []
-};
-}
 
+const QuizList = () => {
 
-getUsersData() {
-axios
-.get(`/api/Quizzes`, {})
-.then(res => {
-const data = res.data
-console.log(data)
-const users = data.map(u =>
-  <div>
-   <p> -------------------------</p>
-   <Link to="/quiz">
+  const [quizes, setQuizes] = useState([])
 
-Name: {u.name}
-</Link>
-  <p>Description: {u.description}</p>
-  <p>Time: {u.time_limit}</p>
-  </div>
-  )
+  useEffect(() => {
 
-  this.setState({
-      users
-  })
+    axios
+      .get(`/api/Quizzes`, {})
+      .then(res => {
+        const data = res.data
+        setQuizes(data)
+      })
+      .catch(err => console.log(err))
 
-})
-.catch((error) => {
-  console.log(error)
-})
+  }, [])
 
-}
-componentDidMount(){
-this.getUsersData()
-}
-
-render() {
 
   return (
     <div>
-      {this.state.users}
+      {quizes.map(quiz => (
+        <div key={quiz._id}>
+          <p> -------------------------</p>
+          <Link to={`/quiz/${quiz._id}`}>
+
+            Name: {quiz.name}
+          </Link>
+          <p>Description: {quiz.description}</p>
+          <p>Time: {quiz.time_limit}</p>
+        </div>
+      ))}
     </div>
-    )
-  }
+  )
 }
+
+export default QuizList

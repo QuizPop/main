@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './index.css'
 
-export default function Quiz(questionArray) {
+export default function Quiz(props) {
 
 	const questions = [
 		{
@@ -42,9 +43,15 @@ export default function Quiz(questionArray) {
 		},
 	];
 
+	const myId = props.match.params.id
+
+	console.log(myId, "<===my id")
+
 	const [currentQuestion, setCurrentQuestion] = useState(0);
 	const [showScore, setShowScore] = useState(false);
 	const [score, setScore] = useState(0);
+	const [quiz, setQuiz] = useState({})
+	const [answerOptions, setAnswerOptions] = useState({})
 
 	const handleAnswerOptionClick = (isCorrect) => {
 		if (isCorrect) {
@@ -52,36 +59,59 @@ export default function Quiz(questionArray) {
 		}
 
 		const nextQuestion = currentQuestion + 1;
-		if (nextQuestion < questions.length) {
+		if (nextQuestion < answerOptions.length) {
 			setCurrentQuestion(nextQuestion);
 		} else {
 			setShowScore(true);
 		}
 	};
+
+	useEffect(() => {
+		axios
+		.get(`/api/Quizzes/${myId}`, {})
+		.then(res => {
+		  const data = res.data
+		  setQuiz(data)
+		  setAnswerOptions(data.questions)
+		})
+		.catch(err => console.log(err))
+
+	
+	}, [])
+
+	console.log(answerOptions, "ans")
+	if(answerOptions.length > 0){
 	return (
 		
 		<div className='app'>
 			{showScore ? (
 				<div className='score-section'>
-					You scored {score} out of {questions.length}
+					You scored {score} out of {answerOptions&& answerOptions.length}
 				</div>
+				
 			) : (
-				<>
+			(
+					 <>
 					<div className='question-section'>
 						<div className='question-count'>
-							<span>Question {currentQuestion + 1}</span>/{questions.length}
-						</div>
-						<div className='question-text'>{questions[currentQuestion].questionText}</div>
+							<span>Question {currentQuestion + 1}</span>/{ answerOptions.length}
+						</div> 
+						 <div className='question-text'>{answerOptions[currentQuestion] && answerOptions[currentQuestion].questionText}</div>
 					</div>
-					<div className='answer-section'>
-						{questions[currentQuestion].answerOptions.map((answerOption) => (
-							<button onClick={() => handleAnswerOptionClick(answerOption.isCorrect)}>{answerOption.answerText}</button>
+				 <div className='answer-section'>
+				 {answerOptions[currentQuestion] && answerOptions[currentQuestion].answerOptions.map((answerOption, index) => (
+							<button key={index} onClick={() => handleAnswerOptionClick(answerOption.isCorrect)}>{answerOption.answerText}</button>
 						))}
-					</div>
+					</div> 
 				</>
+				)
 			)}
 			
 		</div>
 		
 	);
+						}
+						else{
+							return <p>no answer oprtions</p>
+						}
 }

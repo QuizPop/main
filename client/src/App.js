@@ -49,13 +49,13 @@ class App extends Component {
             <Route exact path="/" component={Landing} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
-            <Route exact path="/quiz" component={quiz} />
             <Route exact path="/myprofile" component={myprofile} />
             <Route exact path="/quiz-create" component={quizCreate} />
             <Route exact path="/quiz-list" component={quizList} />
             <Route exact path="/platform-create" component={platform} />
             <Route exact path="/platform-list" component={platformList} />
             <Route exact path="/leaderboard" component={leaderboards} />
+            <Route exact path="/quiz/:id" component={quiz} />
 
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
