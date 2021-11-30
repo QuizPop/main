@@ -23,7 +23,7 @@ const QuizList = () => {
   return (
     <div>
       {quizes.map(quiz => (
-        <div key={quiz._id}>
+        <div style={{border: "5px solid #FFFF00" , textAlign: "center"}} key={quiz._id}>
           <p> -------------------------</p>
           <Link to={`/quiz/${quiz._id}`}>
 
