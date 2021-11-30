@@ -67,6 +67,19 @@ return (
             </div>
             <div className="col s6">
               <Link
+                to="/platform-list"
+                style={{
+                  width: "300px",
+                  borderRadius: "3px",
+                  letterSpacing: "1.5px"
+                }}
+                className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+              >
+                Platform List
+              </Link>
+            </div>
+            <div className="col s6">
+              <Link
                 to="/leaderboard"
                 style={{
                   width: "190px",
