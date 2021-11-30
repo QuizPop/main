@@ -36,19 +36,6 @@ return (
             >
               Logout
             </button>
-            <div className="col s6">
-              <Link
-                to="/quiz"
-                style={{
-                  width: "140px",
-                  borderRadius: "3px",
-                  letterSpacing: "1.5px"
-                }}
-                className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-              >
-                Quiz
-              </Link>
-            </div>
 
             <div className="col s6">
               <Link
@@ -76,6 +63,19 @@ return (
                 className="btn btn-large waves-effect waves-light hoverable blue accent-3"
               >
                 Quizzes
+              </Link>
+            </div>
+            <div className="col s6">
+              <Link
+                to="/leaderboard"
+                style={{
+                  width: "190px",
+                  borderRadius: "3px",
+                  letterSpacing: "1px"
+                }}
+                className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+              >
+                Leaderboards
               </Link>
             </div>
             <div className="col s6">
