@@ -81,7 +81,7 @@ const PlatformList = () => {
       {platforms.map(platform => (
         <div style={{border: "5px solid #4682b4" , textAlign: "center"}} key={platform._id}>
           <p> -------------------------</p>
-          <Link to={`/platfroms/${platform._id}`}>
+          <Link to={`/platforms/${platform._id}`}>
 
             Name: {platform.name}
           </Link>
