@@ -27,10 +27,6 @@ const QuizSchema = new Schema({
   questions:
     [{questionText: String, 
       hint: String, 
-      answerOption1: String, 
-      answerOption2: String, 
-      answerOption3: String, 
-      answerOption4: String,
       answerIndex: Number,
       answerOptions: Array
     }],

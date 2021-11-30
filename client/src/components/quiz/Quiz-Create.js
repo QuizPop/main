@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from "react-router-dom";
+// import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
-import { correct } from "react-redux";
-import classnames from "classnames";
+// import { correct } from "react-redux";
+// import classnames from "classnames";
 import { connect } from "react-redux";
 import { Quiz_Create } from "../../actions/QuizActions";
 class QuizCreate extends Component {
@@ -45,19 +45,19 @@ class QuizCreate extends Component {
 
     addQuestion = e => {
       e.preventDefault();
+      const test=[false,false,false,false]
+
+      test[document.getElementById("answerIndex").value-1]= true;
+
       const newQuestion = {
         questionText : document.getElementById("questionText").value,
         hint: document.getElementById("hint").value,
-        answerOption1: document.getElementById("answerOption1").value,
-        answerOption2: document.getElementById("answerOption2").value,
-        answerOption3: document.getElementById("answerOption3").value,
-        answerOption4: document.getElementById("answerOption4").value,
         answerIndex: document.getElementById("answerIndex").value,
         answerOptions:[
-          { answerText: document.getElementById("answerOption1").value, isCorrect: false },
-				{ answerText:document.getElementById("answerOption2").value, isCorrect: true },
-				{ answerText: document.getElementById("answerOption3").value, isCorrect: false },
-				{ answerText: document.getElementById("answerOption4").value, isCorrect: false },
+          { answerText: document.getElementById("answerOption1").value, isCorrect: test[0] },
+				{ answerText:document.getElementById("answerOption2").value, isCorrect: test[1] },
+				{ answerText: document.getElementById("answerOption3").value, isCorrect: test[2]},
+				{ answerText: document.getElementById("answerOption4").value, isCorrect: test[3] },
         ]
       };
       this.state.questions.push(newQuestion);
@@ -135,22 +135,22 @@ class QuizCreate extends Component {
                   </div>
                   <h5>Questions</h5>
                       <form id = "myform" noValidate onAdd = {this.onAdd}>
-                          question
+                          Question
                           <input id="questionText" label="question" type="text" />
-                          hint
+                          Hint
                           <input id="hint" type="text" />
-                          choice 1
+                          Choice 1
                           <input id="answerOption1" type="text" />
-                          <input type="checkbox" style={{opacity: 1}} onChange={this.handleCheck}  checked={check1} name="check1"/>
-                          choice 2
+                          {/* <input type="checkbox" style={{opacity: 1}} onChange={this.handleCheck}  checked={check1} name="check1"/> */}
+                          Choice 2
                           <input id="answerOption2" type="text" />
-                          <input type="checkbox" style={{opacity: 1}} onChange={this.handleCheck} checked={check2} name="check2"/>
-                          choice 3
+                          {/* <input type="checkbox" style={{opacity: 1}} onChange={this.handleCheck} checked={check2} name="check2"/> */}
+                          Choice 3
                           <input id="answerOption3"  type="text" />
-                          <input type="checkbox" style={{opacity: 1}} onChange={this.handleCheck} checked={check3} name="check3"/>
-                          choice 4
+                          {/* <input type="checkbox" style={{opacity: 1}} onChange={this.handleCheck} checked={check3} name="check3"/> */}
+                          Choice 4
                           <input id="answerOption4" type="text" />
-                          <input type="checkbox" style={{opacity: 1}} checked={check4}  onChange={this.handleCheck}  checked={check4} name="check4"/>
+                          {/* <input type="checkbox" style={{opacity: 1}} checked={check4}  onChange={this.handleCheck}  checked={check4} name="check4"/> */}
                           Answer Index
                           <input id="answerIndex" type="text" />
                          

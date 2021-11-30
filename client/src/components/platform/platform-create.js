@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from "react-router-dom";
+// import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
-import { correct } from "react-redux";
-import classnames from "classnames";
+// import { correct } from "react-redux";
+// import classnames from "classnames";
 import { connect } from "react-redux";
 import { Platform_Create } from "../../actions/PlatformActions";
 class platform extends Component {
