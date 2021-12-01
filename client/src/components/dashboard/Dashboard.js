@@ -24,14 +24,16 @@ return (
 
             </h4>
             <button
-              style={{
+    
 
-                width: "150px",
+              style={{
+                width: "300px",
                 borderRadius: "3px",
-                letterSpacing: "1.5px",
-                marginTop: "1rem",
+                letterSpacing: "1.5px"
+
               }}
               onClick={this.onLogoutClick}
+
               className="btn btn-large waves-effect waves-light hoverable blue accent-3"
             >
               Logout
@@ -41,7 +43,7 @@ return (
               <Link
                 to="/myprofile"
                 style={{
-                  width: "140px",
+                  width: "300px",
                   borderRadius: "3px",
                   letterSpacing: "1.5px"
                 }}
@@ -56,7 +58,7 @@ return (
               <Link
                 to="/quizlist"
                 style={{
-                  width: "140px",
+                  width: "300px",
                   borderRadius: "3px",
                   letterSpacing: "1.5px"
                 }}
@@ -82,9 +84,9 @@ return (
               <Link
                 to="/leaderboard"
                 style={{
-                  width: "190px",
+                  width: "300px",
                   borderRadius: "3px",
-                  letterSpacing: "1px"
+                  letterSpacing: "1.5px"
                 }}
                 className="btn btn-large waves-effect waves-light hoverable blue accent-3"
               >

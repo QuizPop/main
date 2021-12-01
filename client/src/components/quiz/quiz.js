@@ -4,9 +4,9 @@ import './index.css'
 
 
 
-let div = document.createElement('div');
-div.innerHTML = '<div>Quiz closes in <p id="time">05:00</p> minutes!</div> ';
-document.body.appendChild(div);
+// let div = document.createElement('p');
+// div.innerHTML = '<div>Quiz closes in <p id="time">05:00</p> minutes!</div> ';
+// document.body.appendChild(div);
 
 
 function startTimer(duration, display) {
@@ -25,17 +25,17 @@ function startTimer(duration, display) {
 		}
 	}, 1000);
 }
-window.onload = function () {
-	var fiveMinutes = 60 * 5,
-	display = document.getElementById('time');
+// window.onload = function () {
+// 	var fiveMinutes = 60 * 5,
+// 	display = document.getElementById('time');
 
-	startTimer(fiveMinutes, display);
+// 	startTimer(fiveMinutes, display);
 
-	<div className = 'time'>Quiz closes in <span id="time">05:00</span> minutes!</div>
+// 	<div className = 'time'>Quiz closes in <span id="time">05:00</span> minutes!</div>
 
 	
 
-};
+// };
 
 
 export default function Quiz(props) {
