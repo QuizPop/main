@@ -43,15 +43,21 @@ export default function Quiz(props) {
 	// 	},
 	// ];
 
-	const myId = props.match.params.id
+	const myId = props.match.params.id 
+	const userScore = props.match.params.score 
+	console.log(userScore);
 
 	console.log(myId, "<===my id")
 
 	const [currentQuestion, setCurrentQuestion] = useState(0);
 	const [showScore, setShowScore] = useState(false);
 	const [score, setScore] = useState(0);
+	//const [userScore, setUserScore] = useState();
 	const [quiz, setQuiz] = useState({})
-	const [answerOptions, setAnswerOptions] = useState({})
+	const [answerOptions, setAnswerOptions] = useState({}) 
+
+	
+	
 
 	const handleAnswerOptionClick = (isCorrect) => {
 		if (isCorrect) {
@@ -77,7 +83,18 @@ export default function Quiz(props) {
 		.catch(err => console.log(err))
 
 	
-	}, [])
+	}, []) 
+
+	useEffect(() => {
+		axios
+		.get(`/api/users/${myId}`, {})
+		.then(res => {  
+		  setUserScore(score)
+		})
+		.catch(err => console.log(err))
+
+	
+	}, []) 
 
 	console.log(answerOptions, "ans")
 	if(answerOptions.length > 0){
