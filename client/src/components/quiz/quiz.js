@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './index.css'
 
+
 export default function Quiz(props) {
+	
 
 	// const questions = [
 	// 	{
@@ -47,6 +49,7 @@ export default function Quiz(props) {
 
 	console.log(myId, "<===my id")
 
+
 	const [currentQuestion, setCurrentQuestion] = useState(0);
 	const [showScore, setShowScore] = useState(false);
 	const [score, setScore] = useState(0);
@@ -64,6 +67,11 @@ export default function Quiz(props) {
 		} else {
 			setShowScore(true);
 		}
+		if(showScore){
+			//update the users score
+			console.log("send the quiz score and add it to the users score")
+		}
+
 	};
 
 	useEffect(() => {
@@ -75,8 +83,6 @@ export default function Quiz(props) {
 		  setAnswerOptions(data.questions)
 		})
 		.catch(err => console.log(err))
-
-	
 	}, [])
 
 	console.log(answerOptions, "ans")
