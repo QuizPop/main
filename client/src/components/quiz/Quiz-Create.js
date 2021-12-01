@@ -78,6 +78,8 @@ class QuizCreate extends Component {
       const {check1, check2, check3, check4} = this.state
       console.log(check1, check2, " <+===checks")
             return (
+
+              
                 <div className="container">
                   <div className="row">
                     <div className="col s8 offset-s2">
