@@ -31,7 +31,7 @@ window.onload = function () {
 
 	startTimer(fiveMinutes, display);
 
-	// <div className = 'time'>Quiz closes in <span id="time">05:00</span> minutes!</div>
+	<div className = 'time'>Quiz closes in <span id="time">05:00</span> minutes!</div>
 
 	
 
