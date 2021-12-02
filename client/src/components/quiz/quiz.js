@@ -80,14 +80,9 @@ export default function Quiz(props) {
 	// 	},
 	// ];
 
-<<<<<<< HEAD
 	
 	const myId = props.match.params.id
 
-=======
-	const myId = props.match.params.id 
-	
->>>>>>> Score
 	console.log(myId, "<===my id")
 
 
