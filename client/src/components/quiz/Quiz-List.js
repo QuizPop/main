@@ -32,7 +32,7 @@ const QuizList = () => {
             </p>
             <p>Description: {quiz.description}</p>
             <p className="time-label">
-              <img className="timer-icon mr-2" src="/assets/img/timer.png" />{" "}
+              <img className="timer-icon mr-2" src="/timer.png" />{" "}
               {("0" + Math.floor(quiz.time_limit / 60)).slice(-2) +
                 ":" +
                 ("0" + Math.floor(quiz.time_limit % 60)).slice(-2)}

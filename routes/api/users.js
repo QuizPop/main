@@ -44,7 +44,8 @@ User.findOne({ email: req.body.email }).then(user => {
         email: req.body.email,
         password: req.body.password, 
         bio: req.body.bio,
-        score: 0
+        score: 0,
+        isPlatform: req.body.isPlatform || false
       });
 
 // Hash password before saving in database
@@ -96,7 +97,8 @@ const { errors, isValid } = validateLoginInput(req.body);
           name: user.name,
           email: user.email,
           bio: user.bio, 
-          date: user.date
+          date: user.date,
+          isPlatform: user.isPlatform || false
         };
   
 // Sign token
