@@ -4,30 +4,38 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
   name: {
     type: String,
-    required: true
+    required: true,
   },
   email: {
     type: String,
-    required: true
+    required: true,
   },
   password: {
     type: String,
-    required: true
+    required: true,
   },
   bio: {
-    type: String
+    type: String,
   },
   date: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
-  bio:{
+  bio: {
     type: String,
-    required: true
+    required: true,
   },
-  score:{
+  score: {
     type: Number,
-    default: 0
-  }
+    default: 0,
+  },
+  isPlatform: {
+    type: Boolean,
+    default: false,
+  },
+  badges: {
+    type: [],
+    default: [],
+  },
 });
 module.exports = User = mongoose.model("users", UserSchema);

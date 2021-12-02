@@ -1,7 +1,6 @@
 // import React, {Component} from 'react';
 // import axios from 'axios';
 
-
 // export default class leaderboard extends Component {
 // constructor(props) {
 // super(props);
@@ -9,7 +8,6 @@
 // Users: []
 // };
 // }
-
 
 // getUsersData() {
 // axios
@@ -49,46 +47,48 @@
 //     )
 //   }
 // }
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 
-
 const Leaderboard = () => {
-
-  const [quizes, setQuizes] = useState([])
+  const [quizes, setQuizes] = useState([]);
   quizes.sort((a, b) => {
-    return b['score'] - a['score']
-  })
-  console.log(quizes)
+    return b["score"] - a["score"];
+  });
+  console.log(quizes);
   useEffect(() => {
-
     axios
       .get(`/api/users`, {})
-      .then(res => {
-        const data = res.data
-        setQuizes(data)
+      .then((res) => {
+        const data = res.data;
+        setQuizes(data);
       })
-      .catch(err => console.log(err))
-
-  }, [])
-
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
-    <div>
-      {quizes.map(quiz => (
-        <div style={{border: "5px solid #008B8B" , textAlign: "center"}} key={quiz._id}>
-          <p> -------------------------</p>
-          <Link>
-
-            Name: {quiz.name}
-          </Link>
-          <p>Score: {quiz.score}</p>
-
-        </div>
+    <div style={{ padding: "40px" }}>
+      {quizes.map((quiz) => (
+        <Link>
+          <div className="leaderboard-card mb-8" key={quiz._id}>
+            <p
+              style={{
+                fontSize: "18px",
+                fontWeight: "600",
+                marginTop: 0,
+                color: "#34495e",
+              }}
+            >
+              {quiz.name}
+            </p>
+            {/* <p>Score: {quiz.score}</p> */}
+            <div className="score-bubble-inline">{quiz.score || 0}</div>
+          </div>
+        </Link>
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default Leaderboard
+export default Leaderboard;
