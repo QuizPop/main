@@ -45,46 +45,54 @@ class Dashboard extends Component {
                 Quizzes
               </Link>
             </div>
-            <div className="col s6 mt-16">
-              <Link
-                to="/platform-list"
-                style={{
-                  width: "90%",
-                  borderRadius: "3px",
-                  letterSpacing: "1.5px",
-                }}
-                className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-              >
-                Platforms List
-              </Link>
-            </div>
-            <div className="col s6 mt-16">
-              <Link
-                to="/leaderboard"
-                style={{
-                  width: "90%",
-                  borderRadius: "3px",
-                  letterSpacing: "1px",
-                }}
-                className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-              >
-                Leaderboard
-              </Link>
-            </div>
-            <div className="col s6 mt-16">
-              <Link
-                to="/quiz-create"
-                style={{
-                  width: "90%",
-                  borderRadius: "3px",
-                  letterSpacing: "1.5px",
-                }}
-                className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-              >
-                Create Quiz
-              </Link>
-            </div>
-            <div className="col s6 mt-16">
+            {!this.props.auth.user.isPlatform && (
+              <div className="col s6 mt-16">
+                <Link
+                  to="/platform-list"
+                  style={{
+                    width: "90%",
+                    borderRadius: "3px",
+                    letterSpacing: "1.5px",
+                  }}
+                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                >
+                  Platforms List
+                </Link>
+              </div>
+            )}
+            {!this.props.auth.user.isPlatform && (
+              <div className="col s6 mt-16">
+                <Link
+                  to="/leaderboard"
+                  style={{
+                    width: "90%",
+                    borderRadius: "3px",
+                    letterSpacing: "1px",
+                  }}
+                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                >
+                  Leaderboard
+                </Link>
+              </div>
+            )}
+            {this.props.auth.user.isPlatform && (
+              <div className="col s6 mt-16">
+                <Link
+                  to="/quiz-create"
+                  style={{
+                    width: "90%",
+                    borderRadius: "3px",
+                    letterSpacing: "1.5px",
+                  }}
+                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                >
+                  Create Quiz
+                </Link>
+              </div>
+            )}
+
+            {/* To be discussed */}
+            {/* <div className="col s6 mt-16">
               <Link
                 to="/platform-create"
                 style={{
@@ -96,7 +104,7 @@ class Dashboard extends Component {
               >
                 Create Platform
               </Link>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

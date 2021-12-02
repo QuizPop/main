@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
 import classnames from "classnames";
-class Register extends Component {
+class RegisterAsPlatform extends Component {
   constructor() {
     super();
     this.state = {
@@ -42,6 +42,7 @@ class Register extends Component {
       password: this.state.password,
       password2: this.state.password2,
       bio: this.state.bio,
+      isPlatform: true,
     };
     this.props.registerUser(newUser, this.props.history);
   };
@@ -57,14 +58,13 @@ class Register extends Component {
             </Link>
             <div className="col s12" style={{ paddingLeft: "11.250px" }}>
               <h4>
-                <b>Register</b> below
+                <b>Register as a platform</b> below
               </h4>
               <p className="grey-text text-darken-1">
                 Already have an account? <Link to="/login">Log in</Link>
               </p>
               <p className="grey-text text-darken-1">
-                Register as platform?{" "}
-                <Link to="/platform-register">Register as platform</Link>
+                Register as user? <Link to="/register">Register as user</Link>
               </p>
             </div>
             <form noValidate onSubmit={this.onSubmit}>
@@ -159,7 +159,7 @@ class Register extends Component {
     );
   }
 }
-Register.propTypes = {
+RegisterAsPlatform.propTypes = {
   registerUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
@@ -168,4 +168,6 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
   errors: state.errors,
 });
-export default connect(mapStateToProps, { registerUser })(withRouter(Register));
+export default connect(mapStateToProps, { registerUser })(
+  withRouter(RegisterAsPlatform)
+);

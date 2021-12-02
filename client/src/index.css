@@ -12,6 +12,14 @@ code {
     monospace;
 }
 
+.p-2 {
+  padding: 0.5rem;
+}
+
+.p-4 {
+  padding: 1rem;
+}
+
 .mt-4 {
   margin-top: 1rem;
 }
@@ -38,4 +46,99 @@ code {
 
 .mb-20 {
   margin-bottom: 5rem;
+}
+
+.mr-4 {
+  margin-right: 1rem;
+}
+
+.mr-2 {
+  margin-right: 0.5rem;
+}
+
+.profile-card,
+.quiz-card,
+.question-card,
+.platform-card,
+.leaderboard-card {
+  border: 2px solid #2979ff;
+  border-radius: 16px;
+  padding: 1rem;
+  position: relative;
+}
+
+.field-label {
+  font-weight: 500;
+}
+
+.score-bubble {
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 28px;
+  border-radius: 50%;
+  background-color: #2ecc71;
+  right: 30px;
+  top: -40px;
+}
+
+.score-bubble-inline {
+  width: 80px;
+  height: 80px;
+
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 28px;
+  border-radius: 50%;
+  background-color: #2ecc71;
+}
+
+.quiz-board,
+.platform-board {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 40px;
+  padding: 40px;
+}
+
+.quiz-card {
+  height: 100%;
+}
+
+.platform-card {
+  padding-bottom: 0.5rem;
+}
+
+.leaderboard-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.time-label {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+  position: absolute;
+  bottom: 0px;
+  right: 16px;
+}
+
+.timer-icon {
+  width: 22px;
+  height: 22px;
+}
+
+.question-card {
+  max-width: 800px;
+  margin: 4rem auto;
+  padding: 2rem;
 }

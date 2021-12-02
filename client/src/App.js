@@ -8,6 +8,7 @@ import store from "./store";
 import Navbar from "./components/layout/Navbar";
 import Landing from "./components/layout/Landing";
 import Register from "./components/auth/Register";
+import RegisterAsPlatform from "./components/auth/PlatformRegister";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
@@ -15,12 +16,11 @@ import quiz from "./components/quiz/quiz";
 import myprofile from "./components/quiz/myprofile";
 import quizCreate from "./components/quiz/Quiz-Create";
 import platform from "./components/platform/platform-create";
-import plats from "./components/platform/platform"
+import plats from "./components/platform/platform";
 //import platformCreate from "./components/platform/Platform-Create";
-import leaderboards from "./components/leaderboards/leaderboard"
+import leaderboards from "./components/leaderboards/leaderboard";
 import platformList from "./components/platform/Platform-List";
 import quizList from "./components/quiz/Quiz-List";
-
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -31,7 +31,7 @@ if (localStorage.jwtToken) {
   const decoded = jwt_decode(token);
   // Set user and isAuthenticated
   store.dispatch(setCurrentUser(decoded));
-// Check for expired token
+  // Check for expired token
   const currentTime = Date.now() / 1000; // to get in milliseconds
   if (decoded.exp < currentTime) {
     // Logout user
@@ -49,6 +49,11 @@ class App extends Component {
             <Navbar />
             <Route exact path="/" component={Landing} />
             <Route exact path="/register" component={Register} />
+            <Route
+              exact
+              path="/platform-register"
+              component={RegisterAsPlatform}
+            />
             <Route exact path="/login" component={Login} />
             <Route exact path="/myprofile" component={myprofile} />
             <Route exact path="/quiz-create" component={quizCreate} />
@@ -65,7 +70,6 @@ class App extends Component {
             </Switch>
           </div>
         </Router>
-        
       </Provider>
     );
   }
