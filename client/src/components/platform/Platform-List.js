@@ -10,7 +10,6 @@
 // };
 // }
 
-
 // getUsersData() {
 // axios
 // .get(`/api/Platforms`, {})
@@ -54,43 +53,60 @@
 //   }
 // }
 
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 
-
 const PlatformList = () => {
-
-  const [platforms, setPlatforms] = useState([])
+  const [platforms, setPlatforms] = useState([]);
 
   useEffect(() => {
-
     axios
       .get(`/api/Platforms`, {})
-      .then(res => {
-        const data = res.data
-        setPlatforms(data)
+      .then((res) => {
+        const data = res.data;
+        setPlatforms(data);
       })
-      .catch(err => console.log(err))
-
-  }, [])
-
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
-    <div>
-      {platforms.map(platform => (
-        <div style={{border: "5px solid #4682b4" , textAlign: "center"}} key={platform._id}>
-          <p> -------------------------</p>
-          <Link to={`/platforms/${platform._id}`}>
+    <div className="platform-board">
+      {platforms.map((platform) => (
+        <Link to={`/platforms/${platform._id}`}>
+          <div className="platform-card" key={platform._id}>
+            <p
+              style={{
+                fontSize: "18px",
+                fontWeight: "600",
+                marginTop: 0,
+                color: "#34495e",
+              }}
+            >
+              {platform.name}
+            </p>
+            <p>{platform.description}</p>
+            <p>
+              {platform.tags.split(",").map((item) => (
+                <span
+                  style={{
+                    backgroundColor: "#95a5a6",
+                    color: "#FFF",
+                    padding: "4px 10px",
+                    borderRadius: "10px",
 
-            Name: {platform.name}
-          </Link>
-          <p>Description: {platform.description}</p>
-          <p>Tags: {platform.tags}</p>
-        </div>
+                    marginRight: "4px",
+                  }}
+                >
+                  {item}
+                </span>
+              ))}
+            </p>
+          </div>
+        </Link>
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default PlatformList
+export default PlatformList;
