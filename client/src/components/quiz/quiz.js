@@ -143,7 +143,7 @@ const Quiz = (props) => {
       .then((res) => {
         const data = res.data;
         setQuiz(data);
-        setCurrentTime(10);
+        setCurrentTime(data.time_limit);
         setAnswerOptions(data.questions);
       })
       .catch((err) => console.log(err));
