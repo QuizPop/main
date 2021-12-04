@@ -55,7 +55,7 @@ export default function Platform(props) {
 
             <p className="flow-text grey-text text-darken-1">
               <span className="field-label">Tag:</span>{" "}
-              {platform.tags.split(",").map((item) => (
+              {platform.tags && platform.tags.split(",").map((item) => (
                 <span
                   style={{
                     backgroundColor: "#95a5a6",
