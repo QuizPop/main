@@ -71,6 +71,86 @@ code {
   font-weight: 500;
 }
 
+.avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 16px;
+  border: 2px solid #2979ff;
+}
+
+.overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.avatar-selector {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 1rem;
+  padding-top: 0;
+}
+
+.avatar-selector-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 1rem;
+}
+
+.avatar-selector-header {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.avatar-selector-header p {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.avatar-selector-header .close-button {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+img.close-button:hover {
+  border-radius: 0 !important;
+  border-color: transparent !important;
+  padding: 0;
+}
+
+.avatar-selector img {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+.avatar-selector img:hover {
+  border-radius: 16px;
+  border: 2px solid #2979ff;
+}
+
+.badge-icon {
+  width: 70px;
+  height: 70px;
+  border: 3px solid #2ecc71;
+  padding: 12px;
+  border-radius: 50%;
+  cursor: default;
+  margin: 0 12px;
+}
 .score-bubble {
   width: 80px;
   height: 80px;
@@ -141,4 +221,17 @@ code {
   max-width: 800px;
   margin: 4rem auto;
   padding: 2rem;
+}
+
+.start-quiz {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

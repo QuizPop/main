@@ -7,7 +7,7 @@ import "./index.css";
 
 // let div = document.createElement('div');
 // div.innerHTML = '<div>Quiz closes in <p id="time">05:00</p> minutes!</div> ';
-// document.body.appendChild(div);f
+// document.body.appendChild(div);
 
 // function startTimer(duration, display) {
 // 	var timer = duration, minutes, seconds;
@@ -93,7 +93,8 @@ const Quiz = (props) => {
 
   const handleAnswerOptionClick = (isCorrect) => {
     //Calculate updated score before calling setScore() as state might not be set immediately, as it is asynchronous and reading score value inside updateScore might return incorrect value
-    const updatedScore = isCorrect ? score + 1 : score;
+    const updatedScore = isCorrect ? score + 1 : updatedScore;
+
     setScore(updatedScore);
     const nextQuestion = currentQuestion + 1;
     if (nextQuestion < answerOptions.length) {
