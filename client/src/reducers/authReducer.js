@@ -1,6 +1,7 @@
 import {
   SET_CURRENT_USER,
-  USER_LOADING
+  USER_LOADING,
+  UPDATE_SCORE
 } from "../actions/types";
 
 const isEmpty = require("is-empty");
@@ -8,7 +9,7 @@ const isEmpty = require("is-empty");
 const initialState = {
   isAuthenticated: false,
   user: {},
-  loading: false
+  loading: false,
 };
 
 // needed to give this function a name
@@ -19,13 +20,16 @@ export default function authReducer(state = initialState, action) {
       return {
         ...state,
         isAuthenticated: !isEmpty(action.payload),
-        user: action.payload
+        user: action.payload,
       };
     case USER_LOADING:
       return {
         ...state,
-        loading: true
+        loading: true,
       };
+    case UPDATE_SCORE:
+      return { ...state, user: action.payload };
+
     default:
       return state;
   }

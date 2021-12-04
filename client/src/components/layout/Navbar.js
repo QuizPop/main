@@ -1,12 +1,27 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { logoutUser } from "../../actions/authActions";
+import { logoutUser, updateScore } from "../../actions/authActions";
 import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
+import axios from "axios";
 class Navbar extends Component {
   onLogoutClick = (e) => {
     e.preventDefault();
     this.props.logoutUser();
+    this.props.history.push("/login");
   };
+
+  async componentDidMount() {
+    axios
+      .get(`/api/users/${this.props.auth.user.id}/stats`)
+      .then((res) => {
+        this.props.updateScore({
+          ...this.props.auth.user,
+          score: res.data.score
+        });
+      })
+      .catch((err) => console.log(err));
+  }
   render() {
     return (
       <div className="navbar-fixed">
@@ -23,6 +38,27 @@ class Navbar extends Component {
               QuizPop
             </Link>
             {/* Only show the logout button below if logged in */}
+            {this.props.auth.user.id && !this.props.auth.user.isPlatform && (
+              <h3
+                style={{
+                  width: "40px",
+                  height: "40px",
+                  fontSize: "18px",
+                  fontWeight: "700",
+                  borderRadius: "50%",
+                  color: "white",
+                  backgroundColor: "#2ecc71",
+                  position: "absolute",
+                  marginTop: "1rem",
+                  right: "190px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                {this.props.auth.user.score}
+              </h3>
+            )}
             {this.props.auth.user.id && (
               <button
                 style={{
@@ -49,4 +85,6 @@ class Navbar extends Component {
 const mapStateToProps = (state) => ({
   auth: state.auth,
 });
-export default connect(mapStateToProps, { logoutUser })(Navbar);
+export default connect(mapStateToProps, { logoutUser, updateScore })(
+  withRouter(Navbar)
+);
