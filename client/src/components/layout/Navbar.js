@@ -11,13 +11,13 @@ class Navbar extends Component {
     return (
       <div className="navbar-fixed">
         <nav className="z-depth-0">
-          <div className="nav-wrapper white">
+          <div className="nav-wrapper cyan">
             <Link
               to="/dashboard"
               style={{
                 fontFamily: "monospace",
               }}
-              className="col s5 brand-logo center black-text"
+              className="col s5 brand-logo left black-text"
             >
               <i className="material-icons">code</i>
               QuizPop
