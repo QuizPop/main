@@ -70,24 +70,33 @@ router.put("/:id/update-score", async (req, res) => {
 
   const updateScore = (currentState.score || 0) + req.body.pointsScored;
 
+  const badgesEarned = req.body.badgesEarned;
+
   const updatedScore = await User.findOneAndUpdate(
     { _id: req.params.id },
-    { score: updateScore},
+    { score: updateScore, badges: badgesEarned },
     { new: true }
   );
   return res
     .status(200)
-    .json({ score: updatedScore.score });
+    .json({ score: updatedScore.score, badges: updatedScore.badges });
 });
 
-
+router.put("/:id/update-avatar", async (req, res) => {
+  const updatedAvatar = await User.findOneAndUpdate(
+    { _id: req.params.id },
+    { avatarId: req.body.avatarId },
+    { new: true }
+  );
+  return res.status(200).json({ avatarId: updatedAvatar.avatarId });
+});
 
 router.get("/:id/stats", async (req, res) => {
   const user = await User.findOne({ _id: req.params.id });
 
   return res
     .status(200)
-    .json({ score: user.score });
+    .json({ score: user.score, badges: user.badges, avatarId: user.avatarId });
 });
 
 router.post("/login", (req, res) => {

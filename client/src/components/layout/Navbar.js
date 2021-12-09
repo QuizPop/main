@@ -17,7 +17,9 @@ class Navbar extends Component {
       .then((res) => {
         this.props.updateScore({
           ...this.props.auth.user,
-          score: res.data.score
+          score: res.data.score,
+          badges: res.data.badges,
+          avatarId: res.data.avatarId,
         });
       })
       .catch((err) => console.log(err));

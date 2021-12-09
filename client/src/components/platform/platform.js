@@ -55,20 +55,21 @@ export default function Platform(props) {
 
             <p className="flow-text grey-text text-darken-1">
               <span className="field-label">Tag:</span>{" "}
-              {platform.tags && platform.tags.split(",").map((item) => (
-                <span
-                  style={{
-                    backgroundColor: "#95a5a6",
-                    color: "#FFF",
-                    padding: "4px 10px",
-                    borderRadius: "10px",
+              {platform.tags &&
+                platform.tags.split(",").map((item) => (
+                  <span
+                    style={{
+                      backgroundColor: "#95a5a6",
+                      color: "#FFF",
+                      padding: "4px 10px",
+                      borderRadius: "10px",
 
-                    marginRight: "4px",
-                  }}
-                >
-                  {item}
-                </span>
-              ))}
+                      marginRight: "4px",
+                    }}
+                  >
+                    {item}
+                  </span>
+                ))}
               <span style={{ fontFamily: "monospace" }}></span>
             </p>
           </h4>

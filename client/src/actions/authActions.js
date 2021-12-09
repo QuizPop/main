@@ -6,7 +6,8 @@ import {
   GET_ERRORS,
   SET_CURRENT_USER,
   USER_LOADING,
-  UPDATE_SCORE
+  UPDATE_SCORE,
+  UPDATE_AVATAR,
 } from "./types";
 
 // Register User
@@ -69,6 +70,12 @@ export const updateScore = (user) => {
   };
 };
 
+export const updateAvatar = (user) => {
+  return {
+    type: UPDATE_AVATAR,
+    payload: user,
+  };
+};
 
 // Log user out
 export const logoutUser = (history) => (dispatch) => {

@@ -1,7 +1,8 @@
 import {
   SET_CURRENT_USER,
   USER_LOADING,
-  UPDATE_SCORE
+  UPDATE_SCORE,
+  UPDATE_AVATAR,
 } from "../actions/types";
 
 const isEmpty = require("is-empty");
@@ -30,6 +31,8 @@ export default function authReducer(state = initialState, action) {
     case UPDATE_SCORE:
       return { ...state, user: action.payload };
 
+    case UPDATE_AVATAR:
+      return { ...state, user: action.payload };
     default:
       return state;
   }
