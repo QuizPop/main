@@ -2,12 +2,25 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-const PrivateRoute = ({ component: Component, auth, ...rest }) => (
+const PrivateRoute = ({
+  component: Component,
+  auth,
+  platformOnly, //Lets you limit a certain route for platform users only
+  ...rest
+}) => (
   <Route
     {...rest}
-    render={props =>
+    render={(props) =>
       auth.isAuthenticated === true ? (
-        <Component {...props} />
+        platformOnly ? (
+          auth.user.isPlatform ? (
+            <Component {...props} />
+          ) : (
+            <Redirect to="/dashboard" />
+          )
+        ) : (
+          <Component {...props} />
+        )
       ) : (
         <Redirect to="/login" />
       )
@@ -15,9 +28,9 @@ const PrivateRoute = ({ component: Component, auth, ...rest }) => (
   />
 );
 PrivateRoute.propTypes = {
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
 };
-const mapStateToProps = state => ({
-  auth: state.auth
+const mapStateToProps = (state) => ({
+  auth: state.auth,
 });
 export default connect(mapStateToProps)(PrivateRoute);
