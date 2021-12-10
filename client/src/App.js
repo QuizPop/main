@@ -15,6 +15,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import quiz from "./components/quiz/quiz";
 import myprofile from "./components/quiz/myprofile";
 import quizCreate from "./components/quiz/Quiz-Create";
+import quizEdit from "./components/quiz/Quiz-Edit";
 import platform from "./components/platform/platform-create";
 import plats from "./components/platform/platform";
 //import platformCreate from "./components/platform/Platform-Create";
@@ -55,18 +56,42 @@ class App extends Component {
               component={RegisterAsPlatform}
             />
             <Route exact path="/login" component={Login} />
-            <Route exact path="/myprofile" component={myprofile} />
-            <Route exact path="/quiz-create" component={quizCreate} />
-            <Route exact path="/quiz-list" component={quizList} />
-            <Route exact path="/platform-create" component={platform} />
-            <Route exact path="/platform-list" component={platformList} />
-            <Route exact path="/leaderboard" component={leaderboards} />
-            <Route exact path="/quiz/:id" component={quiz} />
-            <Route exact path="/platforms/:id" component={plats} />
 
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute exact path="/quizlist" component={quizList} />
+              <PrivateRoute exact path="/myprofile" component={myprofile} />
+              <PrivateRoute
+                exact
+                path="/quiz-create"
+                platformOnly={true}
+                component={quizCreate}
+              />
+              <PrivateRoute
+                exact
+                path="/quiz-edit/:id"
+                platformOnly={true}
+                component={quizEdit}
+              />
+              <PrivateRoute exact path="/quiz-list" component={quizList} />
+              <PrivateRoute
+                exact
+                path="/platform-create"
+                platformOnly={true}
+                component={platform}
+              />
+              <PrivateRoute
+                exact
+                path="/platform-list"
+                component={platformList}
+              />
+              <PrivateRoute
+                exact
+                path="/leaderboard"
+                component={leaderboards}
+              />
+              <PrivateRoute exact path="/quiz/:id" component={quiz} />
+              <PrivateRoute exact path="/platforms/:id" component={plats} />
             </Switch>
           </div>
         </Router>

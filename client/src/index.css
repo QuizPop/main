@@ -20,6 +20,10 @@ code {
   padding: 1rem;
 }
 
+.p-8 {
+  padding: 2rem !important;
+}
+
 .mt-4 {
   margin-top: 1rem;
 }
@@ -36,6 +40,9 @@ code {
   margin-top: 4rem;
 }
 
+.mt-32 {
+  margin-top: 8rem;
+}
 .mb-8 {
   margin-bottom: 2rem;
 }
@@ -234,4 +241,10 @@ img.close-button:hover {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.quiz-field-label {
+  font-weight: bold;
+  margin-top: 20px;
+  display: block;
 }
