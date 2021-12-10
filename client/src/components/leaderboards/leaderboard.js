@@ -77,12 +77,29 @@ const Leaderboard = () => {
                 fontSize: "18px",
                 fontWeight: "600",
                 marginTop: 0,
+                marginBottom: 0,
                 color: "#34495e",
               }}
             >
               {quiz.name}
             </p>
             {/* <p>Score: {quiz.score}</p> */}
+            {!quiz.isPlatform && quiz.badges && (
+              <p
+                className="flow-text grey-text text-darken-1"
+                style={{ display: "flex", alignItems: "center" }}
+              >
+                {quiz.badges.includes("badge-brainiac") && (
+                  <img src="/assets/img/idea.png" className="badge-icon" />
+                )}
+                {quiz.badges.includes("badge-pro") && (
+                  <img src="/assets/img/badge.png" className="badge-icon" />
+                )}
+                {quiz.badges.includes("badge-swift-finish") && (
+                  <img src="/assets/img/lightning.png" className="badge-icon" />
+                )}
+              </p>
+            )}
             <div className="score-bubble-inline">{quiz.score || 0}</div>
           </div>
         </Link>
