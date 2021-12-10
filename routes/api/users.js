@@ -91,6 +91,39 @@ router.put("/:id/update-avatar", async (req, res) => {
   return res.status(200).json({ avatarId: updatedAvatar.avatarId });
 });
 
+router.put("/:id/update", async (req, res) => {
+  const user = await User.findOneAndUpdate(
+    { _id: req.params.id },
+    { email: req.body.email, name: req.body.name, bio: req.body.bio },
+    { new: true }
+  );
+  const payload = {
+    id: user.id,
+    name: user.name,
+    email: user.email,
+    bio: user.bio,
+    date: user.date,
+    isPlatform: user.isPlatform,
+    score: user.score,
+    avatarId: user.avatarId,
+  };
+
+  // Sign token
+  jwt.sign(
+    payload,
+    keys.secretOrKey,
+    {
+      expiresIn: 31556926, // 1 year in seconds
+    },
+    (err, token) => {
+      res.json({
+        success: true,
+        token: "Bearer " + token,
+      });
+    }
+  );
+});
+
 router.get("/:id/stats", async (req, res) => {
   const user = await User.findOne({ _id: req.params.id });
 
