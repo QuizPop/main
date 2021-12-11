@@ -8,15 +8,39 @@ import {
   // USER_LOADING
 } from "./types";
 
-export const Quiz_Create = (quizData, history) => dispatch => {
-  console.log(quizData)
-    axios
-      .post("/api/Quizzes/quiz-create", quizData)
-      .then(res => history.push("/dashboard")) // re-direct to dashboard after successful creation
-      .catch(err =>
-        dispatch({
-          type: GET_ERRORS,
-          payload: err.response.data
-        })
-      );
-  };
+export const Quiz_Create = (quizData, history) => (dispatch) => {
+  console.log(quizData);
+  axios
+    .post("/api/Quizzes/quiz-create", quizData)
+    .then((res) => history.push("/dashboard")) // re-direct to dashboard after successful creation
+    .catch((err) =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
+};
+
+export const Quiz_Update = (quizId, quizData, history) => (dispatch) => {
+  axios
+    .patch(`/api/Quizzes/${quizId}`, quizData)
+    .then((res) => history.push("/quiz-list")) // re-direct to your own quiz list after successful update
+    .catch((err) =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
+};
+
+export const Quiz_Delete = (quizId, history) => (dispatch) => {
+  axios
+    .delete(`/api/Quizzes/${quizId}`)
+    .then((res) => history.push("/quiz-list")) // re-direct to your own quiz list after successful delete
+    .catch((err) =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
+};

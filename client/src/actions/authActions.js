@@ -23,6 +23,29 @@ export const registerUser = (userData, history) => (dispatch) => {
     );
 };
 
+// Register User
+export const updateUser = (userData, history) => (dispatch) => {
+  axios
+    .put(`/api/users/${userData.id}/update`, userData)
+    .then((res) => {
+      // Update token in localStorage
+      const { token } = res.data;
+      localStorage.setItem("jwtToken", token);
+      // Set token to Auth header
+      setAuthToken(token);
+      // Decode token to get user data
+      const decoded = jwt_decode(token);
+      // Set current user
+      dispatch(setCurrentUser(decoded));
+    }) // update user data on global state
+    .catch((err) =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
+};
+
 // Login - get user token
 export const loginUser = (userData) => (dispatch) => {
   axios

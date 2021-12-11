@@ -55,7 +55,7 @@ const Quiz = (props) => {
 
   const handleAnswerOptionClick = (isCorrect) => {
     //Calculate updated score before calling setScore() as state might not be set immediately, as it is asynchronous and reading score value inside updateScore might return incorrect value
-    const updatedScore = isCorrect ? score + 1 : updatedScore;
+    const updatedScore = isCorrect ? score + 1 : score;
 
     setScore(updatedScore);
     const nextQuestion = currentQuestion + 1;
@@ -105,7 +105,7 @@ const Quiz = (props) => {
       .then((res) => {
         const data = res.data;
         setQuiz(data);
-        setCurrentTime(10);
+        setCurrentTime(data.time_limit);
         setAnswerOptions(data.questions);
       })
       .catch((err) => console.log(err));
