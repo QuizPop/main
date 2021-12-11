@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -8,23 +7,39 @@ import { connect } from "react-redux";
 const Leaderboard = (props) => {
   const [quizes, setQuizes] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [total, setTotal] = useState(0);
+  const [page, setPage] = useState(1);
+  const [size, setSize] = useState(10);
   quizes.sort((a, b) => {
     return b["score"] - a["score"];
   });
 
-  useEffect(() => {
+  const fetchLeaderBoard = async (pageNum) => {
     setLoading(true);
+
     axios
-      .get(`/api/users`, {})
+      .get(`/api/users?page=${pageNum}`)
       .then((res) => {
-        const data = res.data;
-        setQuizes(data);
-        setLoading(false);
+        axios.get(`/api/users/count`).then((count) => {
+          const data = res.data;
+          setQuizes(data.data);
+          setTotal(count.data);
+          setLoading(false);
+        });
       })
       .catch((err) => {
         console.log(err);
         setLoading(false);
       });
+  };
+
+  const handlePagination = async (pageNum) => {
+    setPage(pageNum);
+    fetchLeaderBoard(pageNum);
+  };
+
+  useEffect(() => {
+    fetchLeaderBoard(page);
   }, []);
 
   if (loading)
@@ -75,7 +90,7 @@ const Leaderboard = (props) => {
                 color: "white",
               }}
             >
-              #{index + 1}
+              #{index + 1 + (page == 1 ? 0 : page - 1) * size}
             </p>
             <p
               style={{
@@ -122,6 +137,16 @@ const Leaderboard = (props) => {
           <div className="score-bubble-inline">{quiz.score || 0}</div>
         </div>
       ))}
+      <div className="pagination">
+        {[...Array(Math.ceil(total / size)).keys()].map((item) => (
+          <span
+            className={page == item + 1 ? "page current" : "page"}
+            onClick={() => handlePagination(item + 1)}
+          >
+            {item + 1}
+          </span>
+        ))}
+      </div>
     </div>
   );
 };

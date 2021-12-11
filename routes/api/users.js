@@ -11,14 +11,37 @@ const validateLoginInput = require("../../validation/login");
 // Load User model
 const User = require("../../models/User");
 
-router.route("/").get((req, res) => {
-  return User.find((error, data) => {
+router.route("/count").get((req, res) => {
+  return User.countDocuments({}, (error, data) => {
     if (error) {
       return next(error);
     } else {
       return res.json(data);
     }
   });
+});
+
+router.route("/").get((req, res) => {
+  const page = req.query.page || 0;
+  const size = req.query.size || 10;
+  return User.find(
+    {},
+    {},
+    {
+      skip: page == 1 ? 0 : page * size,
+      limit: size,
+      sort: {
+        score: -1,
+      },
+    },
+    (error, data) => {
+      if (error) {
+        return next(error);
+      } else {
+        return res.json({ data: data, currentPage: page });
+      }
+    }
+  );
 });
 // @route POST api/users/register
 // @desc Register user

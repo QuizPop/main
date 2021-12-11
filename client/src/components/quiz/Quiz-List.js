@@ -32,63 +32,74 @@ const QuizList = (props) => {
         <input
           onChange={(e) => onChange(e)}
           value={searchQuery}
+          autoFocus
           id="search-quiz"
+          placeholder="Search quizzes"
           type="text"
         />
         <label htmlFor="search-quiz">Search</label>
       </div>
       <div className="quiz-board">
-        {quizes.map((quiz) => (
-          <Link
-            to={
-              props.auth.user.isPlatform
-                ? `/quiz-edit/${quiz._id}`
-                : `/quiz/${quiz._id}`
-            }
-            key={quiz._id}
-          >
-            <div className="quiz-card" key={quiz._id}>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                }}
-              >
-                <p
+        {quizes
+          .filter(
+            (item) =>
+              item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+              item.description.toLowerCase().includes(searchQuery.toLowerCase())
+          )
+          .map((quiz) => (
+            <Link
+              to={
+                props.auth.user.isPlatform
+                  ? `/quiz-edit/${quiz._id}`
+                  : `/quiz/${quiz._id}`
+              }
+              key={quiz._id}
+            >
+              <div className="quiz-card" key={quiz._id}>
+                <div
                   style={{
-                    fontSize: "18px",
-                    fontWeight: "600",
-                    marginTop: 0,
-                    color: "#34495e",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
                   }}
                 >
-                  {quiz.name}
-                </p>
-                {props.auth.user.isPlatform && (
-                  <button
+                  <p
                     style={{
-                      width: "60px",
-                      borderRadius: "3px",
-                      letterSpacing: "1.5px",
+                      fontSize: "18px",
+                      fontWeight: "600",
+                      marginTop: 0,
+                      color: "#34495e",
                     }}
-                    onClick={() => {}}
-                    className="btn btn-small waves-effect waves-light hoverable green accent-5"
                   >
-                    Edit
-                  </button>
-                )}
+                    {quiz.name}
+                  </p>
+                  {props.auth.user.isPlatform && (
+                    <button
+                      style={{
+                        width: "60px",
+                        borderRadius: "3px",
+                        letterSpacing: "1.5px",
+                      }}
+                      onClick={() => {}}
+                      className="btn btn-small waves-effect waves-light hoverable green accent-5"
+                    >
+                      Edit
+                    </button>
+                  )}
+                </div>
+                <p>Description: {quiz.description}</p>
+                <p className="time-label">
+                  <img
+                    className="timer-icon mr-2"
+                    src="/assets/img/timer.png"
+                  />{" "}
+                  {("0" + Math.floor(quiz.time_limit / 60)).slice(-2) +
+                    ":" +
+                    ("0" + Math.floor(quiz.time_limit % 60)).slice(-2)}
+                </p>
               </div>
-              <p>Description: {quiz.description}</p>
-              <p className="time-label">
-                <img className="timer-icon mr-2" src="/assets/img/timer.png" />{" "}
-                {("0" + Math.floor(quiz.time_limit / 60)).slice(-2) +
-                  ":" +
-                  ("0" + Math.floor(quiz.time_limit % 60)).slice(-2)}
-              </p>
-            </div>
-          </Link>
-        ))}
+            </Link>
+          ))}
       </div>
       {props.auth.user.isPlatform && (
         <div className="col s6 mt-16 center-align">
