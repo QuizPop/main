@@ -12,6 +12,7 @@ class Navbar extends Component {
   };
 
   async componentDidMount() {
+    if (!this.props.auth.user.id) return;
     axios
       .get(`/api/users/${this.props.auth.user.id}/stats`)
       .then((res) => {
