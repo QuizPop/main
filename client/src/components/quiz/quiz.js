@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { updateScore } from "../../actions/authActions";
 import "./index.css";
+import { Link } from "react-router-dom";
 
 // let div = document.createElement('div');
 // div.innerHTML = '<div>Quiz closes in <p id="time">05:00</p> minutes!</div> ';
@@ -36,45 +37,6 @@ import "./index.css";
 // };
 
 const Quiz = (props) => {
-  // const questions = [
-  // 	{
-  // 		questionText: 'What is the capital of France?',
-  // 		answerOptions: [
-  // 			{ answerText: 'New York', isCorrect: false },
-  // 			{ answerText: 'London', isCorrect: false },
-  // 			{ answerText: 'Paris', isCorrect: true },
-  // 			{ answerText: 'Dublin', isCorrect: false },
-  // 		],
-  // 	},
-  // 	{
-  // 		questionText: 'Who is CEO of Tesla?',
-  // 		answerOptions: [
-  // 			{ answerText: 'Jeff Bezos', isCorrect: false },
-  // 			{ answerText: 'Elon Musk', isCorrect: true },
-  // 			{ answerText: 'Bill Gates', isCorrect: false },
-  // 			{ answerText: 'Tony Stark', isCorrect: false },
-  // 		],
-  // 	},
-  // 	{
-  // 		questionText: 'The iPhone was created by which company?',
-  // 		answerOptions: [
-  // 			{ answerText: 'Apple', isCorrect: true },
-  // 			{ answerText: 'Intel', isCorrect: false },
-  // 			{ answerText: 'Amazon', isCorrect: false },
-  // 			{ answerText: 'Microsoft', isCorrect: false },
-  // 		],
-  // 	},
-  // 	{
-  // 		questionText: 'How many Harry Potter books are there?',
-  // 		answerOptions: [
-  // 			{ answerText: '1', isCorrect: false },
-  // 			{ answerText: '4', isCorrect: false },
-  // 			{ answerText: '6', isCorrect: false },
-  // 			{ answerText: '7', isCorrect: true },
-  // 		],
-  // 	},
-  // ];
-
   const myId = props.match.params.id;
 
   console.log(myId, "<===my id");
@@ -93,7 +55,7 @@ const Quiz = (props) => {
 
   const handleAnswerOptionClick = (isCorrect) => {
     //Calculate updated score before calling setScore() as state might not be set immediately, as it is asynchronous and reading score value inside updateScore might return incorrect value
-    const updatedScore = isCorrect ? score + 1 : score;
+    const updatedScore = isCorrect ? score + 1 : updatedScore;
 
     setScore(updatedScore);
     const nextQuestion = currentQuestion + 1;
@@ -143,7 +105,7 @@ const Quiz = (props) => {
       .then((res) => {
         const data = res.data;
         setQuiz(data);
-        setCurrentTime(data.time_limit);
+        setCurrentTime(10);
         setAnswerOptions(data.questions);
       })
       .catch((err) => console.log(err));
@@ -194,9 +156,53 @@ const Quiz = (props) => {
             </div>
           )}
           {showScore ? (
-            <div className="score-section">
-              You scored {score} out of {answerOptions && answerOptions.length}
-            </div>
+            <>
+              <div
+                className="score-section center-align"
+                style={{ textAlign: "center", width: "100%" }}
+              >
+                <p style={{ textAlign: "center", width: "100%" }}>
+                  {" "}
+                  You scored {score} out of{" "}
+                  {answerOptions && answerOptions.length}
+                </p>
+              </div>
+
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}
+              >
+                <div className="col s6 mt-16 center-align">
+                  <Link
+                    to={`/quiz/${myId}`}
+                    style={{
+                      width: "340px",
+                      borderRadius: "3px",
+                      letterSpacing: "1.5px",
+                    }}
+                    className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                  >
+                    Try Again
+                  </Link>
+                </div>
+                <div className="col s6 mt-16 center-align">
+                  <Link
+                    to="/quizlist"
+                    style={{
+                      width: "340px",
+                      borderRadius: "3px",
+                      letterSpacing: "1.5px",
+                    }}
+                    className="btn btn-large waves-effect waves-light hoverable green accent-5"
+                  >
+                    Take Another Quiz
+                  </Link>
+                </div>
+              </div>
+            </>
           ) : (
             <>
               <div className="question-section">
@@ -231,7 +237,23 @@ const Quiz = (props) => {
       </>
     );
   } else {
-    return <p>no answer options</p>;
+    return (
+      <div
+        style={{
+          textAlign: "center",
+          width: "100vw",
+          height: "90vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <img
+          src="/assets/img/loader.svg"
+          style={{ width: "60px", margin: "0 auto" }}
+        />
+      </div>
+    );
   }
 };
 

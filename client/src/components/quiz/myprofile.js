@@ -1,15 +1,58 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { logoutUser, updateAvatar } from "../../actions/authActions";
+import {
+  logoutUser,
+  updateAvatar,
+  updateUser,
+} from "../../actions/authActions";
+import classnames from "classnames";
 import axios from "axios";
 // import Quiz from "../quiz/quiz"
 // import { Link } from "react-router-dom";
 
 class Dashboard extends Component {
+  state = {
+    name: "",
+    email: "",
+    password: "",
+    password2: "",
+    bio: "",
+    isEditMode: false,
+    errors: {},
+  };
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({
+        errors: nextProps.errors,
+        name: nextProps.auth.user.name,
+        email: nextProps.auth.user.email,
+        bio: nextProps.auth.user.bio,
+      });
+    }
+  }
+
   onLogoutClick = (e) => {
     e.preventDefault();
     this.props.logoutUser();
+  };
+
+  onSubmit = (e) => {
+    e.preventDefault();
+
+    const user = {
+      name: this.state.name,
+      email: this.state.email,
+      bio: this.state.bio,
+      id: this.props.auth.user.id,
+    };
+    this.props.updateUser(user, this.props.history);
+    this.setState({ ...this.state, editMode: false });
+  };
+
+  onChange = (e) => {
+    this.setState({ [e.target.id]: e.target.value });
   };
 
   selectAvatar = (avatarId) => {
@@ -35,11 +78,78 @@ class Dashboard extends Component {
 
   render() {
     const { user } = this.props.auth;
+    const { errors } = this.state;
     // user.name.split(" ")[0]
     console.log(user);
     console.log();
     return (
       <>
+        {this.state.editMode && (
+          <form
+            noValidate
+            onSubmit={this.onSubmit}
+            className="profile-card container mt-12 p-8"
+          >
+            <h5>Edit Profile</h5>
+            <div className="input-field col s12">
+              <input
+                onChange={this.onChange}
+                value={this.state.name}
+                error={errors.name}
+                id="name"
+                type="text"
+                className={classnames("", {
+                  invalid: errors.name,
+                })}
+              />
+              <label htmlFor="name">Name</label>
+              <span className="red-text">{errors.name}</span>
+            </div>
+            <div className="input-field col s12">
+              <input
+                onChange={this.onChange}
+                value={this.state.email}
+                error={errors.email}
+                id="email"
+                type="email"
+                className={classnames("", {
+                  invalid: errors.email,
+                })}
+              />
+              <label htmlFor="email">Email</label>
+              <span className="red-text">{errors.email}</span>
+            </div>
+
+            <div className="input-field col s12">
+              <input
+                onChange={this.onChange}
+                value={this.state.bio}
+                error={errors.bio}
+                id="bio"
+                type="text"
+                className={classnames("", {
+                  invalid: errors.bio,
+                })}
+              />
+              <label htmlFor="bio">Bio</label>
+              <span className="red-text">{errors.bio}</span>
+            </div>
+            <div className="col s12" style={{ paddingLeft: "11.250px" }}>
+              <button
+                style={{
+                  width: "150px",
+                  borderRadius: "3px",
+                  letterSpacing: "1.5px",
+                  marginTop: "1rem",
+                }}
+                type="submit"
+                className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+              >
+                Update
+              </button>
+            </div>
+          </form>
+        )}
         {this.state.showAvatarSelector && (
           <div className="overlay">
             <div className="avatar-selector">
@@ -98,81 +208,128 @@ class Dashboard extends Component {
             </div>
           </div>
         )}
-        <div
-          style={{ height: "75vh", marginTop: "4rem" }}
-          className="container valign-wrapper"
-        >
-          <div className="row profile-card">
-            {!this.props.auth.user.isPlatform && (
-              <div className="score-bubble">{user.score || 0}</div>
-            )}
-            {!this.props.auth.user.isPlatform && (
-              <img
-                src={`/assets/img/avatars/avatar-${
-                  this.props.auth.user.avatarId || "1"
-                }.png`}
-                className="avatar"
-                style={{ cursor: "pointer" }}
-                onClick={() =>
-                  this.setState({ ...this.state, showAvatarSelector: true })
-                }
-              />
-            )}
-            <div className="col s12">
-              <h4>
-                <b>Account Information: </b>
-              </h4>
-              <p className="flow-text grey-text text-darken-1">
-                <span style={{ fontFamily: "monospace" }}></span>
-              </p>
-
-              <p className="flow-text grey-text text-darken-1">
-                <span className="field-label">Name:</span> {user.name}
-                <span style={{ fontFamily: "monospace" }}></span>
-              </p>
-
-              <p className="flow-text grey-text text-darken-1">
-                <span className="field-label"> Email:</span> {user.email}
-                <span style={{ fontFamily: "monospace" }}></span>
-              </p>
-
-              <p className="flow-text grey-text text-darken-1">
-                <span className="field-label">Bio:</span> {user.bio}
-                <span style={{ fontFamily: "monospace" }}></span>
-              </p>
-
-              <p className="flow-text grey-text text-darken-1">
-                <span className="field-label">Member since:</span>{" "}
-                {user.date.slice(0, 10)}
-                <span style={{ fontFamily: "monospace" }}></span>
-              </p>
-
-              {!this.props.auth.user.isPlatform && this.props.auth.user.badges && (
-                <p
-                  className="flow-text grey-text text-darken-1"
-                  style={{ display: "flex", alignItems: "center" }}
-                >
-                  <span className="field-label"> Badges:</span>
-                  <span style={{ fontFamily: "monospace" }}></span>
-                  {this.props.auth.user.badges.includes("badge-brainiac") && (
-                    <img src="/assets/img/idea.png" className="badge-icon" />
-                  )}
-                  {this.props.auth.user.badges.includes("badge-pro") && (
-                    <img src="/assets/img/badge.png" className="badge-icon" />
-                  )}
-                  {this.props.auth.user.badges.includes(
-                    "badge-swift-finish"
-                  ) && (
-                    <img
-                      src="/assets/img/lightning.png"
-                      className="badge-icon"
-                    />
-                  )}
-                </p>
+        {!this.state.editMode && (
+          <div
+            style={{ height: "75vh", marginTop: "4rem" }}
+            className="container valign-wrapper"
+          >
+            <div className="row profile-card">
+              {!this.props.auth.user.isPlatform && (
+                <div className="score-bubble">{user.score || 0}</div>
               )}
+              {!this.props.auth.user.isPlatform && (
+                <img
+                  src={
+                    this.props.auth.user.avatarId > 0
+                      ? `/assets/img/avatars/avatar-${
+                          this.props.auth.user.avatarId || "1"
+                        }.png`
+                      : "/assets/img/user.png"
+                  }
+                  className="avatar"
+                  style={{ cursor: "pointer" }}
+                  onClick={() =>
+                    this.setState({ ...this.state, showAvatarSelector: true })
+                  }
+                />
+              )}
+              <div className="col s12">
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    width: "100%",
+                  }}
+                >
+                  <h4>
+                    <b>Account Information: </b>
+                  </h4>
+                  <div
+                    className="col s6 right-align"
+                    style={{ paddingLeft: "11.250px" }}
+                  >
+                    <button
+                      style={{
+                        width: "150px",
+                        borderRadius: "3px",
+                        letterSpacing: "1.5px",
+                        marginTop: "1rem",
+                      }}
+                      onClick={() =>
+                        this.setState({ ...this.state, editMode: true })
+                      }
+                      type="button"
+                      className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                    >
+                      Edit Profile
+                    </button>
+                  </div>
+                </div>
+                <p className="flow-text grey-text text-darken-1">
+                  <span style={{ fontFamily: "monospace" }}></span>
+                </p>
+
+                <p className="flow-text grey-text text-darken-1">
+                  <span className="field-label">Name:</span> {user.name}
+                  <span style={{ fontFamily: "monospace" }}></span>
+                </p>
+
+                <p className="flow-text grey-text text-darken-1">
+                  <span className="field-label"> Email:</span> {user.email}
+                  <span style={{ fontFamily: "monospace" }}></span>
+                </p>
+
+                <p className="flow-text grey-text text-darken-1">
+                  <span className="field-label">Bio:</span> {user.bio}
+                  <span style={{ fontFamily: "monospace" }}></span>
+                </p>
+
+                <p className="flow-text grey-text text-darken-1">
+                  <span className="field-label">Member since:</span>{" "}
+                  {user.date.slice(0, 10)}
+                  <span style={{ fontFamily: "monospace" }}></span>
+                </p>
+
+                {!this.props.auth.user.isPlatform &&
+                  this.props.auth.user.badges && (
+                    <p
+                      className="flow-text grey-text text-darken-1"
+                      style={{ display: "flex", alignItems: "center" }}
+                    >
+                      <span className="field-label"> Badges:</span>
+                      <span style={{ fontFamily: "monospace" }}></span>
+                      {this.props.auth.user.badges.includes(
+                        "badge-brainiac"
+                      ) && (
+                        <img
+                          src="/assets/img/idea.png"
+                          className="badge-icon"
+                          title="Brainiac"
+                        />
+                      )}
+                      {this.props.auth.user.badges.includes("badge-pro") && (
+                        <img
+                          src="/assets/img/badge.png"
+                          className="badge-icon"
+                          title="Pro"
+                        />
+                      )}
+                      {this.props.auth.user.badges.includes(
+                        "badge-swift-finish"
+                      ) && (
+                        <img
+                          src="/assets/img/lightning.png"
+                          title="Swift Finish"
+                          className="badge-icon"
+                        />
+                      )}
+                    </p>
+                  )}
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </>
     );
   }
@@ -180,10 +337,14 @@ class Dashboard extends Component {
 Dashboard.propTypes = {
   logoutUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
 };
 const mapStateToProps = (state) => ({
   auth: state.auth,
+  errors: state.errors,
 });
-export default connect(mapStateToProps, { logoutUser, updateAvatar })(
-  Dashboard
-);
+export default connect(mapStateToProps, {
+  logoutUser,
+  updateAvatar,
+  updateUser,
+})(Dashboard);

@@ -4,8 +4,13 @@ import PropTypes from "prop-types";
 // import { correct } from "react-redux";
 // import classnames from "classnames";
 import { connect } from "react-redux";
-import { Quiz_Create } from "../../actions/QuizActions";
-class QuizCreate extends Component {
+import {
+  Quiz_Create,
+  Quiz_Update,
+  Quiz_Delete,
+} from "../../actions/QuizActions";
+import axios from "axios";
+class QuizEdit extends Component {
   constructor() {
     super();
     this.state = {
@@ -21,6 +26,26 @@ class QuizCreate extends Component {
     };
   }
 
+  componentDidMount() {
+    axios
+      .get(`/api/Quizzes/${this.props.match.params.id}`, {})
+      .then((res) => {
+        const data = res.data;
+        if (!res.data) {
+          this.props.history.push("/quiz-list");
+        } else {
+          this.setState({
+            ...this.state,
+            name: data.name,
+            description: data.description,
+            time_limit: data.time_limit,
+            questions: data.questions,
+          });
+        }
+      })
+      .catch((err) => console.log(err));
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({
@@ -33,14 +58,21 @@ class QuizCreate extends Component {
   };
   onSubmit = (e) => {
     e.preventDefault();
-    const newQuiz = {
+    const quiz = {
       name: this.state.name,
       description: this.state.description,
       time_limit: this.state.time_limit,
       questions: this.state.questions,
-      ownerId: this.props.auth.user.id,
     };
-    this.props.Quiz_Create(newQuiz, this.props.history);
+    this.props.Quiz_Update(
+      this.props.match.params.id,
+      quiz,
+      this.props.history
+    );
+  };
+
+  onDelete = () => {
+    this.props.Quiz_Delete(this.props.match.params.id, this.props.history);
   };
 
   addQuestion = (e) => {
@@ -89,10 +121,27 @@ class QuizCreate extends Component {
     console.log(check1, check2, " <+===checks");
     return (
       <div className="container">
+        <div
+          className="col s12 right-align"
+          style={{ paddingLeft: "11.250px" }}
+        >
+          <button
+            style={{
+              width: "150px",
+              borderRadius: "3px",
+              letterSpacing: "1.5px",
+              marginTop: "1rem",
+            }}
+            onClick={() => this.onDelete()}
+            className="btn btn-small waves-effect waves-light hoverable gray accent-3"
+          >
+            Delete Quiz
+          </button>
+        </div>
         <div className="row">
           <div className="col s8 offset-s2 profile-card p-8 mt-12">
             <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-              <h4>Create a Quiz!</h4>
+              <h4>Edit Quiz</h4>
             </div>
             <form noValidate onSubmit={this.onSubmit}>
               <div className="input-field col s12">
@@ -174,7 +223,7 @@ class QuizCreate extends Component {
   }
 }
 
-QuizCreate.propTypes = {
+QuizEdit.propTypes = {
   errors: PropTypes.object.isRequired,
 };
 
@@ -183,4 +232,8 @@ const mapStateToProps = (state) => ({
   errors: state.errors,
 });
 
-export default connect(mapStateToProps, { Quiz_Create })(QuizCreate);
+export default connect(mapStateToProps, {
+  Quiz_Create,
+  Quiz_Update,
+  Quiz_Delete,
+})(QuizEdit);
