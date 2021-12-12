@@ -4,6 +4,9 @@ import PropTypes from "prop-types";
 // import { correct } from "react-redux";
 // import classnames from "classnames";
 import { connect } from "react-redux";
+import Question from "./quizComponents/Question";
+import QuizDetails from "./quizComponents/QuizDetails";
+import QuestionEdit from "./quizComponents/QuestionEdit";
 import {
   Quiz_Create,
   Quiz_Update,
@@ -41,6 +44,7 @@ class QuizEdit extends Component {
             time_limit: data.time_limit,
             questions: data.questions,
           });
+          window.M.updateTextFields();
         }
       })
       .catch((err) => console.log(err));
@@ -56,11 +60,11 @@ class QuizEdit extends Component {
   onChange = (e) => {
     this.setState({ [e.target.id]: e.target.value });
   };
-  onSubmit = (e) => {
-    e.preventDefault();
+  onSubmit = () => {
     const quiz = {
       name: this.state.name,
       description: this.state.description,
+      hint: this.state.hint,
       time_limit: this.state.time_limit,
       questions: this.state.questions,
     };
@@ -75,37 +79,27 @@ class QuizEdit extends Component {
     this.props.Quiz_Delete(this.props.match.params.id, this.props.history);
   };
 
-  addQuestion = (e) => {
-    e.preventDefault();
-    const test = [false, false, false, false];
+  onDeleteQuestion = (index) => {
+    const currentQuestions = [...this.state.questions];
+    currentQuestions.splice(index, 1);
+    this.setState({ ...this.state, questions: currentQuestions });
+  };
 
-    test[document.getElementById("answerIndex").value - 1] = true;
+  onEditQuestion = (index, updatedQuestion) => {
+    const currentState = [...this.state.questions];
+    currentState[index] = updatedQuestion;
+    this.setState({ ...this.state, questions: currentState });
+  };
 
-    const newQuestion = {
-      questionText: document.getElementById("questionText").value,
-      hint: document.getElementById("hint").value,
-      answerIndex: document.getElementById("answerIndex").value,
-      answerOptions: [
-        {
-          answerText: document.getElementById("answerOption1").value,
-          isCorrect: test[0],
-        },
-        {
-          answerText: document.getElementById("answerOption2").value,
-          isCorrect: test[1],
-        },
-        {
-          answerText: document.getElementById("answerOption3").value,
-          isCorrect: test[2],
-        },
-        {
-          answerText: document.getElementById("answerOption4").value,
-          isCorrect: test[3],
-        },
-      ],
-    };
-    this.state.questions.push(newQuestion);
-    document.getElementById("myform").reset();
+  onUpdateDetails = (data) => {
+    this.setState({ ...this.state, ...data });
+  };
+
+  addQuestion = (data) => {
+    const newQuestion = data;
+    const currentQuestions = [...this.state.questions];
+    currentQuestions.push(newQuestion);
+    this.setState({ ...this.state, questions: currentQuestions });
   };
 
   handleCheck = (e) => {
@@ -122,7 +116,7 @@ class QuizEdit extends Component {
     return (
       <div className="container">
         <div
-          className="col s12 right-align"
+          className="col s12 right-align mt-12"
           style={{ paddingLeft: "11.250px" }}
         >
           <button
@@ -131,92 +125,70 @@ class QuizEdit extends Component {
               borderRadius: "3px",
               letterSpacing: "1.5px",
               marginTop: "1rem",
+              marginRight: "1rem",
+            }}
+            onClick={() => this.onSubmit()}
+            className="btn btn-small waves-effect waves-light hoverable green accent-5"
+          >
+            Save Changes
+          </button>
+          <button
+            style={{
+              width: "150px",
+              borderRadius: "3px",
+              letterSpacing: "1.5px",
+              marginTop: "1rem",
             }}
             onClick={() => this.onDelete()}
-            className="btn btn-small waves-effect waves-light hoverable gray accent-3"
+            className="btn btn-small waves-effect waves-light hoverable red accent-6"
           >
             Delete Quiz
           </button>
         </div>
-        <div className="row">
-          <div className="col s8 offset-s2 profile-card p-8 mt-12">
-            <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-              <h4>Edit Quiz</h4>
-            </div>
-            <form noValidate onSubmit={this.onSubmit}>
-              <div className="input-field col s12">
-                <input
-                  onChange={this.onChange}
-                  value={this.state.name}
-                  id="name"
-                  type="text"
-                />
-                <label htmlFor="name">Name</label>
-              </div>
-              <div className="input-field col s12">
-                <input
-                  onChange={this.onChange}
-                  value={this.state.description}
-                  id="description"
-                  type="text"
-                />
-                <label htmlFor="description">Description</label>
-              </div>
-              <div className="input-field col s12">
-                <input
-                  onChange={this.onChange}
-                  value={this.state.time_limit}
-                  id="time_limit"
-                  type="text"
-                />
-                <label htmlFor="time_limit">time limit</label>
-              </div>
-              <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                <button
-                  style={{
-                    width: "150px",
-                    borderRadius: "3px",
-                    letterSpacing: "1.5px",
-                    marginTop: "1rem",
-                  }}
-                  type="submit"
-                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-                >
-                  Save
-                </button>
-              </div>
-            </form>
+        <div>
+          <h5 style={{ marginTop: "3rem", marginBottom: "1rem" }}>
+            Quiz Details
+          </h5>
+          <div className="row">
+            <QuizDetails
+              quiz={{
+                name: this.state.name,
+                description: this.state.description,
+                time_limit: this.state.time_limit,
+              }}
+              onUpdate={(data) => this.onUpdateDetails(data)}
+            />
           </div>
         </div>
-        <div className="profile-card p-8 mt-12">
-          <h5 style={{ marginTop: "0", marginBottom: "1rem" }}>Questions</h5>
-          <form id="myform" noValidate onAdd={this.onAdd}>
-            <span className="quiz-field-label">Question</span>
-            <input id="questionText" label="question" type="text" />
-            <span className="quiz-field-label">Hint</span>
-            <input id="hint" type="text" />
-            <span className="quiz-field-label">Choice 1</span>
-            <input id="answerOption1" type="text" />
-            {/* <input type="checkbox" style={{opacity: 1}} onChange={this.handleCheck}  checked={check1} name="check1"/> */}
-            <span className="quiz-field-label">Choice 2</span>
-            <input id="answerOption2" type="text" />
-            {/* <input type="checkbox" style={{opacity: 1}} onChange={this.handleCheck} checked={check2} name="check2"/> */}
-            <span className="quiz-field-label">Choice 3</span>
-            <input id="answerOption3" type="text" />
-            {/* <input type="checkbox" style={{opacity: 1}} onChange={this.handleCheck} checked={check3} name="check3"/> */}
-            <span className="quiz-field-label">Choice 4</span>
-            <input id="answerOption4" type="text" />
-            {/* <input type="checkbox" style={{opacity: 1}} checked={check4}  onChange={this.handleCheck}  checked={check4} name="check4"/> */}
-            <span className="quiz-field-label">Answer Index</span>
-            <input id="answerIndex" type="text" />
-            <button
-              type="button"
-              className="btn btn-large waves-effect waves-light hoverable blue accent-3 mt-4"
-              onClick={this.addQuestion}
-            >
-              add
-            </button>
-          </form>
+        <div>
+          <h5 style={{ marginTop: "3rem", marginBottom: "1rem" }}>Questions</h5>
+          <div className="questions-list">
+            {this.state.questions.map((question, index) => (
+              <Question
+                index={index}
+                total={this.state.questions.length}
+                questionData={question}
+                onEdit={(index, data) => this.onEditQuestion(index, data)}
+                onDelete={(index) => this.onDeleteQuestion(index)}
+              />
+            ))}
+          </div>
+        </div>
+        <div>
+          <QuestionEdit
+            data={{
+              questionText: "",
+              answerIndex: "",
+              hint: "",
+              answerOptions: [
+                { answerText: "", isCorrect: false },
+                { answerText: "", isCorrect: false },
+                { answerText: "", isCorrect: false },
+                { answerText: "", isCorrect: false },
+              ],
+            }}
+            onAdd={(data) => this.addQuestion(data)}
+          />
         </div>
       </div>
     );
