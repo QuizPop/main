@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
 
-const users = require("./routes/api/Users");
+const users = require("./routes/api/users");
 const quizzes = require("./routes/api/Quizzes");
 const platforms = require("./routes/api/Platforms");
 
@@ -38,7 +38,7 @@ app.use(passport.initialize());
 require("./config/passport")(passport);
 
 // Routes
-app.use("/api/Users", users);
+app.use("/api/users", users);
 app.use("/api/Quizzes", quizzes);
 app.use("/api/Platforms", platforms);
 
