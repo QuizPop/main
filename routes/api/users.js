@@ -12,6 +12,7 @@ const validateLoginInput = require("../../validation/login");
 const User = require("../../models/User");
 const Platform = require("../../models/Platform");
 
+//API for counting total number of users for leaderboard pagination
 router.route("/count").get((req, res) => {
   return User.countDocuments({}, (error, data) => {
     if (error) {
@@ -78,13 +79,18 @@ router.post("/register", (req, res) => {
           newUser
             .save()
             .then((user) => {
-              const newPlatform = new Platform({
-                name: req.body.name,
-                description: req.body.description,
-                owner_ID: user._id,
-                tags: "",
-              });
-              newPlatform.save().then((platform) => res.json(user));
+              //Check if user type is platform, if yes, create a platform entry automatically using user details
+              if (user.isPlatform) {
+                const newPlatform = new Platform({
+                  name: req.body.name,
+                  description: req.body.description,
+                  owner_ID: user._id,
+                  tags: "",
+                });
+                newPlatform.save().then((platform) => res.json(user));
+              } else {
+                res.json(user);
+              }
             })
             .catch((err) => console.log(err));
         });
@@ -199,6 +205,7 @@ router.post("/login", (req, res) => {
           score: user.score,
         };
 
+        //Check if user type platform and include platform_ID field on token payload if yes
         if (user.isPlatform) {
           Platform.findOne({ owner_ID: user._id }).then((platform) => {
             payload["platform_ID"] = platform._id;
