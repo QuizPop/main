@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
 
-const validateQuizCreationInput = require("../../validation/quizCreation");
+//const validateQuizCreationInput = require("../../validation/quizCreation");
 //const validateQuizEditInput = require("../../validation/QuizEdit");
 //const validateQuizTakingInput = require("../../validation/QuizTaking");
 
