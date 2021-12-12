@@ -19,7 +19,13 @@ class Dashboard extends Component {
     password2: "",
     bio: "",
     isEditMode: false,
-    errors: {},
+    errors: {
+      name: "",
+      email: "",
+      password: "",
+      password2: "",
+      bio: "",
+    },
   };
 
   componentWillReceiveProps(nextProps) {
@@ -31,6 +37,10 @@ class Dashboard extends Component {
         bio: nextProps.auth.user.bio,
       });
     }
+  }
+
+  componentDidMount() {
+    this.setState({ ...this.state, ...this.props.auth.user });
   }
 
   onLogoutClick = (e) => {
@@ -95,44 +105,50 @@ class Dashboard extends Component {
               <input
                 onChange={this.onChange}
                 value={this.state.name}
-                error={errors.name}
+                error={errors ? errors.name : ""}
                 id="name"
                 type="text"
                 className={classnames("", {
-                  invalid: errors.name,
+                  invalid: errors && errors.name,
                 })}
               />
-              <label htmlFor="name">Name</label>
-              <span className="red-text">{errors.name}</span>
+              <label htmlFor="name" className="active">
+                Name
+              </label>
+              <span className="red-text">{errors && errors.name}</span>
             </div>
             <div className="input-field col s12">
               <input
                 onChange={this.onChange}
                 value={this.state.email}
-                error={errors.email}
+                error={errors ? errors.email : ""}
                 id="email"
                 type="email"
                 className={classnames("", {
-                  invalid: errors.email,
+                  invalid: errors && errors.email,
                 })}
               />
-              <label htmlFor="email">Email</label>
-              <span className="red-text">{errors.email}</span>
+              <label htmlFor="email" className="active">
+                Email
+              </label>
+              <span className="red-text">{errors && errors.email}</span>
             </div>
 
             <div className="input-field col s12">
               <input
                 onChange={this.onChange}
                 value={this.state.bio}
-                error={errors.bio}
+                error={errors ? errors.bio : ""}
                 id="bio"
                 type="text"
                 className={classnames("", {
-                  invalid: errors.bio,
+                  invalid: errors && errors.bio,
                 })}
               />
-              <label htmlFor="bio">Bio</label>
-              <span className="red-text">{errors.bio}</span>
+              <label htmlFor="bio" className="active">
+                Bio
+              </label>
+              <span className="red-text">{errors && errors.bio}</span>
             </div>
             <div className="col s12" style={{ paddingLeft: "11.250px" }}>
               <button

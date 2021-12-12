@@ -104,3 +104,91 @@ button svg {
 [type="checkbox"]:checked {
   opacity: 1 !important;
 }
+
+.question-options-choice {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 2rem;
+}
+
+.options-choice {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.correct-option-icon {
+  width: 20px;
+  height: 20px;
+  margin-left: 1rem;
+}
+
+.flip-vertical {
+  transform: rotate(180deg);
+  transition: all 0.3s linear;
+}
+
+.questions-list {
+  border: 2px solid #2979ff;
+  border-radius: 1rem;
+  padding: 0 1rem;
+}
+
+.question-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1rem 0;
+
+  padding: 1rem 0;
+}
+
+.question-item p {
+  font-size: 18px;
+  margin: 0;
+}
+
+.question-item .tools {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.question-item .tools img {
+  width: 28px;
+  height: 28px;
+  margin-left: 1rem;
+  cursor: pointer;
+}
+
+.vertical-divider {
+  background: #e2e2e2;
+  margin-left: 1rem;
+  width: 1px;
+  height: 30px;
+}
+
+.bb-1 {
+  border-bottom: 2px solid #e2e2e2;
+}
+
+.animate-change {
+  transition: all 0.3s linear;
+}
+
+p.quiz-detail-line {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+p.quiz-detail-line span.quiz-detail-line-value {
+  font-weight: normal;
+}
+
+.question-edit-card {
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  background: #f3f3f3;
+  margin-bottom: 1rem;
+}

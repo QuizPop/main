@@ -12,13 +12,81 @@ const QuestionEdit = ({
 }) => {
   const [question, setQuestion] = useState(data || {});
   const [active, setActive] = useState(controlled);
+  const [errors, setErrors] = useState({
+    questionText: null,
+    hint: null,
+    answerOption1: null,
+    answerOption2: null,
+    answerOption3: null,
+    answerOption4: null,
+    answerIndex: null,
+  });
+
+  const isValidInput = () => {
+    const isQuestionTextValid =
+      question.questionText && question.questionText.trim().length > 0;
+    const isHintValid = question.hint && question.hint.trim().length > 0;
+    const isAnswerOption1Valid =
+      question.answerOptions[0] &&
+      question.answerOptions[0].answerText.trim().length > 0;
+    const isAnswerOption2Valid =
+      question.answerOptions[1] &&
+      question.answerOptions[1].answerText.trim().length > 0;
+    const isAnswerOption3Valid =
+      question.answerOptions[2] &&
+      question.answerOptions[2].answerText.trim().length > 0;
+    const isAnswerOption4Valid =
+      question.answerOptions[3] &&
+      question.answerOptions[3].answerText.trim().length > 0;
+    const isAnswerIndexValid =
+      question.answerIndex && question.answerIndex.trim().length > 0;
+
+    const isValid =
+      isQuestionTextValid &&
+      isHintValid &&
+      isAnswerOption1Valid &&
+      isAnswerOption2Valid &&
+      isAnswerOption3Valid &&
+      isAnswerOption4Valid &&
+      isAnswerIndexValid;
+
+    if (isValid) {
+      return true;
+    } else {
+      const errorsMap = {
+        questionText: isQuestionTextValid ? null : "Question cannot be empty",
+        hint: isHintValid ? null : "Hint cannot be empty",
+        answerOption1: isAnswerOption1Valid
+          ? null
+          : "Choice 1 value cannot be empty",
+        answerOption2: isAnswerOption2Valid
+          ? null
+          : "Choice 2 value cannot be empty",
+        answerOption3: isAnswerOption3Valid
+          ? null
+          : "Choice 3 value cannot be empty",
+        answerOption4: isAnswerOption4Valid
+          ? null
+          : "Choice 4 value cannot be empty",
+        answerIndex: isAnswerIndexValid
+          ? null
+          : "Answer index value cannot be empty",
+      };
+      setErrors(errorsMap);
+      return false;
+    }
+  };
   const handleAddQuestion = () => {
-    onAdd && onAdd(question);
-    setQuestion(data);
-    setActive(false);
+    if (isValidInput()) {
+      onAdd && onAdd(question);
+      setQuestion(data);
+      setActive(false);
+    }
   };
   const handleUpdateQuestion = () => {
-    onUpdate && onUpdate(index, question);
+    if (isValidInput()) {
+      onUpdate && onUpdate(index, question);
+    }
   };
   const onChange = (e) => {
     const update = { ...question };
@@ -45,6 +113,15 @@ const QuestionEdit = ({
     }
 
     setQuestion(update);
+    setErrors({
+      questionText: null,
+      hint: null,
+      answerOption1: null,
+      answerOption2: null,
+      answerOption3: null,
+      answerOption4: null,
+      answerIndex: null,
+    });
   };
   if (!active)
     return (
@@ -73,6 +150,7 @@ const QuestionEdit = ({
             onChange={onChange}
             type="text"
           />
+          <span className="red-text">{errors && errors.questionText}</span>
           <span className="quiz-field-label">Hint</span>
           <input
             id="hint"
@@ -80,6 +158,7 @@ const QuestionEdit = ({
             onChange={onChange}
             value={question.hint || ""}
           />
+          <span className="red-text">{errors && errors.hint}</span>
           <span className="quiz-field-label">Choice 1</span>
           <input
             id="answerOption1"
@@ -91,6 +170,7 @@ const QuestionEdit = ({
                 : ""
             }
           />
+          <span className="red-text">{errors && errors.answerOption1}</span>
           {/* <input type="checkbox" style={{opacity: 1}} onChange={this.handleCheck}  checked={check1} name="check1"/> */}
           <span className="quiz-field-label">Choice 2</span>
           <input
@@ -103,6 +183,8 @@ const QuestionEdit = ({
                 : ""
             }
           />
+          <span className="red-text">{errors && errors.answerOption2}</span>
+
           {/* <input type="checkbox" style={{opacity: 1}} onChange={this.handleCheck} checked={check2} name="check2"/> */}
           <span className="quiz-field-label">Choice 3</span>
           <input
@@ -115,6 +197,8 @@ const QuestionEdit = ({
                 : ""
             }
           />
+          <span className="red-text">{errors && errors.answerOption3}</span>
+
           {/* <input type="checkbox" style={{opacity: 1}} onChange={this.handleCheck} checked={check3} name="check3"/> */}
           <span className="quiz-field-label">Choice 4</span>
           <input
@@ -127,6 +211,8 @@ const QuestionEdit = ({
                 : ""
             }
           />
+          <span className="red-text">{errors && errors.answerOption4}</span>
+
           {/* <input type="checkbox" style={{opacity: 1}} checked={check4}  onChange={this.handleCheck}  checked={check4} name="check4"/> */}
           <span className="quiz-field-label">Answer Index</span>
           <input
@@ -135,9 +221,20 @@ const QuestionEdit = ({
             onChange={onChange}
             value={question.answerIndex}
           />
+          <span className="red-text">{errors && errors.answerIndex}</span>
+
           <button
             type="button"
             className="btn btn-large waves-effect waves-light hoverable blue accent-3 mt-4"
+            disabled={
+              errors.questionText ||
+              errors.hint ||
+              errors.answerOption1 ||
+              errors.answerOption2 ||
+              errors.answerOption3 ||
+              errors.answerOption4 ||
+              errors.answerIndex
+            }
             onClick={() =>
               type == "add" ? handleAddQuestion() : handleUpdateQuestion()
             }

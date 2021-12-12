@@ -176,17 +176,17 @@ const Quiz = (props) => {
                 }}
               >
                 <div className="col s6 mt-16 center-align">
-                  <Link
-                    to={`/quiz/${myId}`}
+                  <button
                     style={{
                       width: "340px",
                       borderRadius: "3px",
                       letterSpacing: "1.5px",
                     }}
                     className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                    onClick={() => window.location.reload()}
                   >
                     Try Again
-                  </Link>
+                  </button>
                 </div>
                 <div className="col s6 mt-16 center-align">
                   <Link

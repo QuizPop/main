@@ -10,6 +10,7 @@ const keys = require("../../config/keys");
 
 const Platform = require("../../models/Platform");
 const Quiz = require("../../models/Quiz");
+const User = require("../../models/User");
 
 router.post("/platform-create", (req, res) => {
   Platform.findOne({ name: req.body.name }).then((quiz) => {
@@ -24,6 +25,25 @@ router.post("/platform-create", (req, res) => {
       .then((quiz) => res.json(quiz))
       .catch((err) => console.log(err));
   });
+});
+
+router.patch("/:id", (req, res) => {
+  return Platform.findOneAndUpdate(
+    { _id: req.params.id },
+    {
+      $set: {
+        description: req.body.description,
+        tags: req.body.tags,
+      },
+    },
+    (error, data) => {
+      if (error) {
+        return next(error);
+      } else {
+        return res.json(data);
+      }
+    }
+  );
 });
 
 router.post("/", (req, res) => {

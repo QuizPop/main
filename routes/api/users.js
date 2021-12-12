@@ -10,6 +10,7 @@ const validateLoginInput = require("../../validation/login");
 
 // Load User model
 const User = require("../../models/User");
+const Platform = require("../../models/Platform");
 
 router.route("/count").get((req, res) => {
   return User.countDocuments({}, (error, data) => {
@@ -76,7 +77,15 @@ router.post("/register", (req, res) => {
           newUser.password = hash;
           newUser
             .save()
-            .then((user) => res.json(user))
+            .then((user) => {
+              const newPlatform = new Platform({
+                name: req.body.name,
+                description: req.body.description,
+                owner_ID: user._id,
+                tags: "",
+              });
+              newPlatform.save().then((platform) => res.json(user));
+            })
             .catch((err) => console.log(err));
         });
       });
@@ -190,20 +199,40 @@ router.post("/login", (req, res) => {
           score: user.score,
         };
 
-        // Sign token
-        jwt.sign(
-          payload,
-          keys.secretOrKey,
-          {
-            expiresIn: 31556926, // 1 year in seconds
-          },
-          (err, token) => {
-            res.json({
-              success: true,
-              token: "Bearer " + token,
-            });
-          }
-        );
+        if (user.isPlatform) {
+          Platform.findOne({ owner_ID: user._id }).then((platform) => {
+            payload["platform_ID"] = platform._id;
+            // Sign token
+            jwt.sign(
+              payload,
+              keys.secretOrKey,
+              {
+                expiresIn: 31556926, // 1 year in seconds
+              },
+              (err, token) => {
+                res.json({
+                  success: true,
+                  token: "Bearer " + token,
+                });
+              }
+            );
+          });
+        } else {
+          // Sign token
+          jwt.sign(
+            payload,
+            keys.secretOrKey,
+            {
+              expiresIn: 31556926, // 1 year in seconds
+            },
+            (err, token) => {
+              res.json({
+                success: true,
+                token: "Bearer " + token,
+              });
+            }
+          );
+        }
       } else {
         return res
           .status(400)

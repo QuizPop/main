@@ -87,20 +87,21 @@ const PlatformList = () => {
             </p>
             <p>{platform.description}</p>
             <p>
-              {platform.tags.split(",").map((item) => (
-                <span
-                  style={{
-                    backgroundColor: "#95a5a6",
-                    color: "#FFF",
-                    padding: "4px 10px",
-                    borderRadius: "10px",
+              {platform.tags &&
+                platform.tags.split(",").map((item) => (
+                  <span
+                    style={{
+                      backgroundColor: "#95a5a6",
+                      color: "#FFF",
+                      padding: "4px 10px",
+                      borderRadius: "10px",
 
-                    marginRight: "4px",
-                  }}
-                >
-                  {item}
-                </span>
-              ))}
+                      marginRight: "4px",
+                    }}
+                  >
+                    {item}
+                  </span>
+                ))}
             </p>
           </div>
         </Link>

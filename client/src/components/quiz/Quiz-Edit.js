@@ -160,20 +160,24 @@ class QuizEdit extends Component {
             />
           </div>
         </div>
-        <div>
-          <h5 style={{ marginTop: "3rem", marginBottom: "1rem" }}>Questions</h5>
-          <div className="questions-list">
-            {this.state.questions.map((question, index) => (
-              <Question
-                index={index}
-                total={this.state.questions.length}
-                questionData={question}
-                onEdit={(index, data) => this.onEditQuestion(index, data)}
-                onDelete={(index) => this.onDeleteQuestion(index)}
-              />
-            ))}
+        {this.state.questions.length > 0 && (
+          <div>
+            <h5 style={{ marginTop: "3rem", marginBottom: "1rem" }}>
+              Questions
+            </h5>
+            <div className="questions-list">
+              {this.state.questions.map((question, index) => (
+                <Question
+                  index={index}
+                  total={this.state.questions.length}
+                  questionData={question}
+                  onEdit={(index, data) => this.onEditQuestion(index, data)}
+                  onDelete={(index) => this.onDeleteQuestion(index)}
+                />
+              ))}
+            </div>
           </div>
-        </div>
+        )}
         <div>
           <QuestionEdit
             data={{

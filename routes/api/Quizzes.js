@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
 
-//const validateQuizCreationInput = require("../../validation/quizCreation");
+const validateQuizCreationInput = require("../../validation/quizCreation");
 //const validateQuizEditInput = require("../../validation/QuizEdit");
 //const validateQuizTakingInput = require("../../validation/QuizTaking");
 
@@ -33,8 +33,8 @@ router.patch("/:id", (req, res) => {
   // if (!isValid) {
   //   return res.status(400).json(errors);
   // }
-  Quiz.findOneAndUpdate(
-    { __id: req.params.id },
+  return Quiz.findOneAndUpdate(
+    { _id: req.params.id },
     {
       $set: {
         name: req.body.name,

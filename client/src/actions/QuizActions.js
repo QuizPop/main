@@ -12,7 +12,10 @@ export const Quiz_Create = (quizData, history) => (dispatch) => {
   console.log(quizData);
   axios
     .post("/api/Quizzes/quiz-create", quizData)
-    .then((res) => history.push("/dashboard")) // re-direct to dashboard after successful creation
+    .then((res) => {
+      console.log(res.data);
+      history.push(`/quiz-edit/${res.data._id}`);
+    }) // re-direct to dashboard after successful creation
     .catch((err) =>
       dispatch({
         type: GET_ERRORS,

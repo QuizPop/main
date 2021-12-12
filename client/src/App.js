@@ -76,7 +76,7 @@ class App extends Component {
               <PrivateRoute exact path="/quiz-list" component={quizList} />
               <PrivateRoute
                 exact
-                path="/platform-create"
+                path="/platform-edit/:id"
                 platformOnly={true}
                 component={platform}
               />

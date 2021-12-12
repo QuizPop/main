@@ -8,16 +8,15 @@ import {
   // USER_LOADING
 } from "./types";
 
-export const Platform_Create = (platformData, history) => dispatch => {
-
-  console.log(platformData)
+export const Platform_Update =
+  (platformId, platformData, history) => (dispatch) => {
     axios
-      .post("/api/Platforms/platform-create", platformData)
-      .then(res => history.push("/dashboard")) // re-direct to dashboard after successful creation
-      .catch(err =>
+      .patch(`/api/Platforms/${platformId}`, platformData)
+      .then((res) => history.push("/dashboard")) // re-direct to dashboard after successful update
+      .catch((err) =>
         dispatch({
           type: GET_ERRORS,
-          payload: err.response.data
+          payload: err.response.data,
         })
       );
   };
