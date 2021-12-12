@@ -34,8 +34,9 @@ class Navbar extends Component {
               to="/dashboard"
               style={{
                 fontFamily: "monospace",
+                color: "#008b8b"
               }}
-              className="col s5 brand-logo center black-text"
+              className="col s5 brand-logo center dark-cyan-text"
             >
               <i className="material-icons">code</i>
               QuizPop

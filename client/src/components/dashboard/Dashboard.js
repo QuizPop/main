@@ -26,7 +26,7 @@ class Dashboard extends Component {
                   borderRadius: "3px",
                   letterSpacing: "1.5px",
                 }}
-                className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                className="btn btn-large waves-effect waves-light hoverable dark-cyan accent-3"
               >
                 My Profile
               </Link>
@@ -40,7 +40,7 @@ class Dashboard extends Component {
                   borderRadius: "3px",
                   letterSpacing: "1.5px",
                 }}
-                className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                className="btn btn-large waves-effect waves-light hoverable dark-cyan accent-3"
               >
                 Quizzes
               </Link>
@@ -54,7 +54,7 @@ class Dashboard extends Component {
                     borderRadius: "3px",
                     letterSpacing: "1.5px",
                   }}
-                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                  className="btn btn-large waves-effect waves-light hoverable dark-cyan accent-3"
                 >
                   Platforms List
                 </Link>
@@ -69,7 +69,7 @@ class Dashboard extends Component {
                     borderRadius: "3px",
                     letterSpacing: "1px",
                   }}
-                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                  className="btn btn-large waves-effect waves-light hoverable dark-cyan accent-3"
                 >
                   Leaderboard
                 </Link>
@@ -84,7 +84,7 @@ class Dashboard extends Component {
                     borderRadius: "3px",
                     letterSpacing: "1.5px",
                   }}
-                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                  className="btn btn-large waves-effect waves-light hoverable dark-cyan accent-3"
                 >
                   Create Quiz
                 </Link>
@@ -100,7 +100,7 @@ class Dashboard extends Component {
                     borderRadius: "3px",
                     letterSpacing: "1.5px",
                   }}
-                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                  className="btn btn-large waves-effect waves-light hoverable dark-cyan accent-3"
                 >
                   Platform Settings
                 </Link>
