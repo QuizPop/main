@@ -108,6 +108,14 @@ const QuestionEdit = ({
         update.answerOptions[3].isCorrect = update.answerIndex == 4;
         break;
 
+        case "answerIndex":
+          update.answerOptions[0].isCorrect = e.target.value == 1;
+          update.answerOptions[1].isCorrect = e.target.value == 2;
+          update.answerOptions[2].isCorrect = e.target.value == 3;
+          update.answerOptions[3].isCorrect = e.target.value == 4; 
+          update[e.target.id]=e.target.value;
+          break;
+
       default:
         update[e.target.id] = e.target.value;
     }

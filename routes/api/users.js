@@ -14,7 +14,7 @@ const Platform = require("../../models/Platform");
 
 //API for counting total number of users for leaderboard pagination
 router.route("/count").get((req, res) => {
-  return User.countDocuments({}, (error, data) => {
+  return User.countDocuments({isPlatform:false}, (error, data) => {
     if (error) {
       return next(error);
     } else {
@@ -27,10 +27,10 @@ router.route("/").get((req, res) => {
   const page = req.query.page || 0;
   const size = req.query.size || 10;
   return User.find(
-    {},
+    {isPlatform:false},
     {},
     {
-      skip: page == 1 ? 0 : page * size,
+      skip: (page - 1) * size,
       limit: size,
       sort: {
         score: -1,
