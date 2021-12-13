@@ -159,7 +159,7 @@ class Dashboard extends Component {
                   marginTop: "1rem",
                 }}
                 type="submit"
-                className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                className="btn btn-large waves-effect waves-light hoverable dark-cyan accent-3"
               >
                 Update
               </button>
@@ -276,7 +276,7 @@ class Dashboard extends Component {
                         this.setState({ ...this.state, editMode: true })
                       }
                       type="button"
-                      className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                      className="btn btn-large waves-effect waves-light hoverable dark-cyan accent-3"
                     >
                       Edit Profile
                     </button>
