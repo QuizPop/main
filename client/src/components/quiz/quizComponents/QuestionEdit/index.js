@@ -39,7 +39,7 @@ const QuestionEdit = ({
       question.answerOptions[3] &&
       question.answerOptions[3].answerText.trim().length > 0;
     const isAnswerIndexValid =
-      question.answerIndex && question.answerIndex.trim().length > 0;
+      question.answerIndex && question.answerIndex != "" && [1,2,3,4].includes(+question.answerIndex);
 
     const isValid =
       isQuestionTextValid &&
@@ -70,7 +70,7 @@ const QuestionEdit = ({
           : "Choice 4 value cannot be empty",
         answerIndex: isAnswerIndexValid
           ? null
-          : "Answer index value cannot be empty",
+          : "Answer index value cannot be empty and 1,2,3,4 are the only valid options",
       };
       setErrors(errorsMap);
       return false;
