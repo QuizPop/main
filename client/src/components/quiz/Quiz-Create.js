@@ -106,7 +106,7 @@ class QuizCreate extends Component {
                   id="time_limit"
                   type="text"
                 />
-                <label htmlFor="time_limit">time limit</label>
+                <label htmlFor="time_limit">time limit (sec)</label>
                 <span className="red-text">
                   {this.state.errors && this.state.errors.time_limit}
                 </span>

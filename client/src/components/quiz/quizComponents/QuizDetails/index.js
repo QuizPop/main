@@ -98,7 +98,7 @@ const QuizDetails = ({ quiz, onUpdate, createMode = false }) => {
                 type="text"
               />
               <label htmlFor="time_limit" className="active">
-                Time limit
+                Time limit(Seconds)
               </label>
               <span className="red-text">{errors && errors.time_limit}</span>
             </div>
